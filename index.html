@@ -1,52 +1,57 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Tourism NZ Transport App</title>
-  </head>
-  <body>
-     <!-- Step 1 landing screen -->
-     <div id="startScreen">
-         <h1>Welcome to Tourism NZ Transport</h1>
-         <p>Lets make your trip to NZ the best vacation ever! We will find the best vehicle hire option for you, 
-         plan your route, calculate all costs, consider all factors so that you can just sit back and relax, you deserve it. </p>
-         <img id="kiwi1" src="images/kiwi-start.jpg">
-         <button type="button" id="startButton" class="btn btn-info">Lets go!</button>
-     </div>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css" type="text/css">
 
-     <!-- Step 2 traveling from screen -->
-     <div id="travelingFromScreen">
-            <h1>Where will your journey start?</h1>
+  <!-- Date Range Picker from: https://github.com/dangrossman/daterangepicker -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-        <div class="mapSelect">
-            <img id="kiwi2" src="images/kiwi-from.jpg">
-            <img id="kiwi3" src="images/kiwi-ok.jpg">
-            <img id="whiteMap" src="images/white-map.jpg">
-            <img id="aucklandMarker" src="images/place-marker-blue.jpg">
-            <img id="wellingtonMarker" src="images/place-marker-blue.jpg">
-            <img id="christchurchMarker" src="images/place-marker-blue.jpg">
-            <img id="dunedinMarker" src="images/place-marker-blue.jpg">
+  <!-- Swiper.js from: https://swiperjs.com/ -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 
-            <img id="aucklandMarkerSelected" src="images/selected-marker-green.jpg">
-            <img id="wellingtonMarkerSelected" src="images/selected-marker-green.jpg">
-            <img id="christchurchMarkerSelected" src="images/selected-marker-green.jpg">
-            <img id="dunedinMarkerSelected" src="images/selected-marker-green.jpg">
-            
-            <button type="button" id="fromButtonConfirm" class="btn btn-info">Confirm Select</button>
 
-        </div>
-     </div>
+  <title>Tourism NZ Transport App</title>
+</head>
 
-     <!-- Step 3 traveling to select screen -->
-     <div id="travelingToScreen">
-            <h1>Where do you want to go?</h1>
+<body>
+  <!-- Step 1 landing screen -->
+  <div id="startScreen" class="d-none">
+    <h1>Welcome to Tourism NZ Transport</h1>
+    <p>Lets make your trip to NZ the best vacation ever! We will find the best vehicle hire option for you,
+      plan your route, calculate all costs, consider all factors so that you can just sit back and relax, you deserve it. </p>
+
+    <img id="kiwi1" src="images/kiwi-start.jpg">
+
+    <button type="button" id="startButton" class="btn btn-info">Lets go!</button>
+  </div>
+
+  <!-- Step 2 traveling from screen -->
+  <div id="travelingFromScreen" class="d-none">
+    <div class="mapSelect">
+      <img id="whiteMap" src="images/white-map.png">
+      <div class="marker" id="aucklandStartMarker"></div>
+      <div class="marker" id="wellingtonStartMarker"></div>
+      <div class="marker" id="christchurchStartMarker"></div>
+      <div class="marker" id="dunedinStartMarker"></div>
+
+      <img id="kiwiFrom" src="images/kiwi-from.jpg">
+      <img id="kiwiFromOk" class="d-none" src="images/kiwi-ok.jpg">
+
+      <h1 id="journeyStartHeading">Where will your journey start?</h1>
+      <button type="button" id="fromButtonConfirm" class="btn btn-info d-none"></button>
+    </div>
+  </div>
+
+  <!-- Step 3 traveling to select screen -->
+  <!-- <div id="travelingToScreen" class="d-none">
+        <h1>Where do you want to go?</h1>
 
         <div class="mapSelect">
             <img id="kiwi4" src="images/kiwi-question.jpg">
@@ -55,41 +60,107 @@
             <button type="button" id="toButtonConfirm" class="btn btn-info">Confirm Select</button>
 
         </div>
-     </div>
+     </div> -->
 
-     <!-- Step 2 traveling from screen -->
-     <div id="travelingFromScreen">
+  <!-- Step 3 -->
+  <div id="travelingToScreen" class="d-none">
+    <div class="mapSelect">
+      <img id="whiteMap" src="images/white-map.png">
+      <div class="marker" id="aucklandEndMarker"></div>
+      <div class="marker" id="wellingtonEndMarker"></div>
+      <div class="marker" id="christchurchEndMarker"></div>
+      <div class="marker" id="dunedinEndMarker"></div>
+
+      <img id="kiwiTo" src="images/kiwi-question.jpg">
+      <img id="kiwiToOk" class="d-none" src="images/kiwi-ok.jpg">
+
+      <h1 id="journeyEndHeading">Where do you want to go?</h1>
+      <button type="button" id="toButtonConfirm" class="btn btn-info d-none"></button>
+    </div>
+  </div>
+
+
+  <!-- Step 4 -->
+  <div id="numberOfPeopleScreen" class="d-none">
+    <div class="container">
+      <div class="row">
+        <div class="person person1 is-selected col-4"></div>
+        <div class="person person2 is-selected col-4"></div>
+        <div class="person person3 col-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="person person4 col-4"></div>
+        <div class="person person5 col-4"></div>
+        <div class="person person6 col-4"></div>
+      </div>
+    </div>
+
+    <img id="kiwiTo" src="images/kiwi-people.jpg">
+
+    <h1 id="peopleHeading">How many people are travelling?</h1>
+    <button type="button" id="peopleButtonConfirm" class="btn btn-info d-none"></button>
+  </div>
+
+  <!-- Step 5 -->
+  <div id="calendarScreen" class="d-none">
+    <input id="tripLengthDatePicker" class="dateInput" type="text" name="daterange" value="" readonly/>
+
+    <img id="kiwiTime" src="images/kiwi-watch.png">
+
+    <h1 id="timeHeading">What dates are you travelling?</h1>
+    <button type="button" id="timeButtonConfirm" class="btn btn-info d-none">Confirm dates</button>
+  </div>
+
+  <!-- Step 6 -->
+  <div id="carScreen" class="dx-none">
+    <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" id="carModalContent">
+
+      </div>
+    </div>
+  </div>
+
+
+    <div id="carContent"></div>
+
+  </div>
+
+  <div id="confirmScreen" class="d-none">
+    <h1>I'm step 7</h1>
+  </div>
+
+  <!-- Step 2 traveling from screen -->
+  <!-- <div id="travelingFromScreen">
             <h1>Where will your journey start?</h1>
             <img id="kiwi2" src="images/kiwiQuestion.jpg">
             <img id="whiteMap" src="images/whiteMap.jpg">
             <button type="button" id="fromButton" class="btn btn-info">Confirm Select</button>
-     </div>
+     </div> -->
 
-     <!-- Step 2 traveling from screen -->
-     <div id="travelingFromScreen">
-            <h1>Where will your journey start?</h1>
-            <img id="kiwi2" src="images/kiwiQuestion.jpg">
-            <img id="whiteMap" src="images/whiteMap.jpg">
-            <button type="button" id="fromButton" class="btn btn-info">Confirm Select</button>
-     </div>
 
-     <!-- Step 2 traveling from screen -->
-     <div id="travelingFromScreen">
-            <h1>Where will your journey start?</h1>
-            <img id="kiwi2" src="images/kiwiQuestion.jpg">
-            <img id="whiteMap" src="images/whiteMap.jpg">
-            <button type="button" id="fromButton" class="btn btn-info">Confirm Select</button>
-     </div>
-      
-    
 
-   
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- jQuery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
-  </body>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <!-- Moment.js date library -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <!-- Date Range Picker from: https://github.com/dangrossman/daterangepicker -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <!-- Swiper.js from: https://swiperjs.com/ -->
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>

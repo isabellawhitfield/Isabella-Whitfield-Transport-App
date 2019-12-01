@@ -1,0 +1,20 @@
+.person {
+  margin-top: $margin;
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.person1 { background-image: url('../images/person-1.png') };
+.person1.is-selected { background-image: url('../images/person-1-selected.png') };
+.person2 { background-image: url('../images/person-2.png') };
+.person2.is-selected { background-image: url('../images/person-2-selected.png') };
+.person3 { background-image: url('../images/person-3.png') };
+.person3.is-selected { background-image: url('../images/person-3-selected.png') };
+.person4 { background-image: url('../images/person-4.png') };
+.person4.is-selected { background-image: url('../images/person-4-selected.png') };
+.person5 { background-image: url('../images/person-5.png') };
+.person5.is-selected { background-image: url('../images/person-5-selected.png') };
+.person6 { background-image: url('../images/person-6.png') };
+.person6.is-selected { background-image: url('../images/person-6-selected.png') };
