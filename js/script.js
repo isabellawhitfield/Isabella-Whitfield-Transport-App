@@ -541,7 +541,7 @@ function initMap(origin,destination) {
         //      var distance = route.legs[i].distance.text;
              
     }
-}) else {
+} else {
   window.alert('Directions request failed due to ' + status);
 }
 });
