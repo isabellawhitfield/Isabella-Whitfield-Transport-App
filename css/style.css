@@ -79,4 +79,10 @@ body {
 .person6.is-selected {
   background-image: url("../images/person-6-selected.png"); }
 
+#map {
+  width: 100%;
+  height: 500px;
+  background-color: #17343;
+  margin-top: 100px; }
+
 /*# sourceMappingURL=style.css.map */
