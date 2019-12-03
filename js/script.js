@@ -7,7 +7,7 @@ var carsAvailable = [
     photo1: "images/motorbike-bmw-1.jpg",
     photo2: "images/motorbike-bmw-2.jpg",
     photo3: "images/motorbike-bmw-3.jpg",
-    fuelType: "Premium Unleaded 95",
+    fuelType: "Petrol 95",
     fuelEfficency: 3.71,
     transmission: "Manual",
     minPeople: 1,
@@ -28,9 +28,9 @@ var carsAvailable = [
     name: "Suzuki SV650",
     type: "Motorbike",
     photo1: "images/motorbike-suzuki-1.jpg",
-    photo2: "images/motorbike-suzuki-2.jpg",
+    photo2: "images/motorbike-suzuki-2.jpeg",
     photo3: "images/motorbike-suzuki-3.jpg",
-    fuelType: "Low Octane Petrol 87",
+    fuelType: "Petrol 87",
     fuelEfficency: 3.71,
     transmission: "Manual",
     minPeople: 1,
@@ -424,16 +424,36 @@ $(document).ready(function () {
 '        <span class="sr-only">Next</span>' +
 '      </a>' +
 '    </div>' +
+
 '    <div class="modal-header">' +
-'' +
-'      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>' +
+'      <h5 class="modal-title font-weight-bold" id="modalCarName">' + carObject.name + '</h5>' +
+
 '      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
 '        <span aria-hidden="true">&times;</span>' +
 '      </button>' +
 '    </div>' +
-'    <div class="modal-body">' +
-'' +
-'' +
+
+'    <div class="modal-body">' + 
+
+'     <div class="container">'+'<div class="row" id="modalCarFacts"</div>' +
+
+'       <p class="card-text col-6"><i class="fas fa-cog"></i> ' + carObject.transmission + '</p>' +
+'       <p class="card-text col-6 font-weight-bold"><i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day</p>' + 
+'     </div>' +
+
+'     <div class="row" id="modalCarFacts"</div>' +'<p class="card-text col-6"><i class="fas fa-car"></i> ' + carObject.manufacturedDate + 
+'       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
+
+'     <div class="row" id="modalCarFacts"</div>' +'<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine + 
+'       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficency + '</p>' + '</div>' +
+
+'     <div class="row" id="modalCarFacts"</div>' +
+'       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
+'       <p class="card-text col-6"><i class="fas fa-user-friends"></i> ' + carObject.minPeople + ' -' + carObject.maxPeople +' people</p>' + 
+'     </div></div>' +
+
+'       <p>' + carObject.carDescription + '</p>' +
+
 '    </div>' +
 '    <div class="modal-footer">' +
 '      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
@@ -441,10 +461,4 @@ $(document).ready(function () {
 '    </div>')
     });
   }
-
-  // var swiper = new Swiper('.swiper-container', {
-  //   pagination: {
-  //     el: '.swiper-pagination',
-  //   },
-  // });
 });
