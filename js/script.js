@@ -7,7 +7,7 @@ var carsAvailable = [
     photo1: "images/motorbike-bmw-1.jpg",
     photo2: "images/motorbike-bmw-2.jpg",
     photo3: "images/motorbike-bmw-3.jpg",
-    fuelType: "Premium Unleaded 95",
+    fuelType: "Petrol 95",
     fuelEfficency: 3.71,
     transmission: "Manual",
     minPeople: 1,
@@ -28,9 +28,9 @@ var carsAvailable = [
     name: "Suzuki SV650",
     type: "Motorbike",
     photo1: "images/motorbike-suzuki-1.jpg",
-    photo2: "images/motorbike-suzuki-2.jpg",
+    photo2: "images/motorbike-suzuki-2.jpeg",
     photo3: "images/motorbike-suzuki-3.jpg",
-    fuelType: "Low Octane Petrol 87",
+    fuelType: "Petrol 87",
     fuelEfficency: 3.71,
     transmission: "Manual",
     minPeople: 1,
@@ -242,8 +242,8 @@ $(document).ready(function () {
     $('#travelingFromScreen').removeClass('d-none');
   });
 
- var cityFrom, cityTo;
- 
+  var cityFrom, cityTo;
+
   // Step 2
   var oldFromSelection;
 
@@ -297,7 +297,7 @@ $(document).ready(function () {
     $('#travelingToScreen').removeClass('d-none');
   });
 
- 
+
 
   // Step 3
   var oldToSelection;
@@ -346,14 +346,14 @@ $(document).ready(function () {
 
     // Show step 4
     $('#numberOfPeopleScreen').removeClass('d-none');
-    console.log(cityFrom,cityTo);
+    console.log(cityFrom, cityTo);
     initMap(cityFrom, cityTo);
-    
-  
+
+
   });
   var script = document.createElement('script');
   // script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc&callback=initMap';
-  script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc';
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc';
   document.getElementsByTagName('body')[0].appendChild(script);
 
   // Step 4
@@ -408,125 +408,144 @@ $(document).ready(function () {
     $('#carContent').append('<div class="card card--car" id="' + id + '" data-toggle="modal" data-target="#exampleModalCenter"> ' +
       '<img src="' + carObject.photo1 + '" class="card-img-top">' +
       '<div class="card-body ">' +
-        '<h5 class="card-title font-weight-bold">' + carObject.name + '</h5>' +
-        '<div class="row">' +
-          '<p class="card-text col-6">' + carObject.transmission + '</p>' +
-          '<p class="card-text text-right col-6 font-weight-bold">$' + carObject.price + '/day</p>' +
-        '</div>' +
+      '<h5 class="card-title font-weight-bold">' + carObject.name + '</h5>' +
+      '<div class="row">' +
+      '<p class="card-text col-6">' + carObject.transmission + '</p>' +
+      '<p class="card-text text-right col-6 font-weight-bold">$' + carObject.price + '/day</p>' +
       '</div>' +
-    '</div>');
+      '</div>' +
+      '</div>');
 
-    $('#' + id).click(carObject, function(event) {
+    $('#' + id).click(carObject, function (event) {
       var carObject = event.data;
       $('#carModalContent').html('<div id="carouselExampleControls" class="carousel slide carousel--car" data-ride="carousel">' +
-'      <div class="carousel-inner">' +
-'        <div class="carousel-item active">' +
-'          <img class="d-block w-100" src="' + carObject.photo1 + '">' +
-'        </div>' +
-'        <div class="carousel-item">' +
-'          <img class="d-block w-100" src="' + carObject.photo2 + '">' +
-'        </div>' +
-'        <div class="carousel-item">' +
-'          <img class="d-block w-100" src="' + carObject.photo3 + '">' +
-'        </div>' +
-'      </div>' +
-'      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
-'        <span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
-'        <span class="sr-only">Previous</span>' +
-'      </a>' +
-'      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
-'        <span class="carousel-control-next-icon" aria-hidden="true"></span>' +
-'        <span class="sr-only">Next</span>' +
-'      </a>' +
-'    </div>' +
-'    <div class="modal-header">' +
-'' +
-'      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>' +
-'      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-'        <span aria-hidden="true">&times;</span>' +
-'      </button>' +
-'    </div>' +
-'    <div class="modal-body">' +
-'' +
-'' +
-'    </div>' +
-'    <div class="modal-footer">' +
-'      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
-'      <button type="button" class="btn btn-primary">Save changes</button>' +
-'    </div>')
+        '      <div class="carousel-inner">' +
+        '        <div class="carousel-item active">' +
+        '          <img class="d-block w-100" src="' + carObject.photo1 + '">' +
+        '        </div>' +
+        '        <div class="carousel-item">' +
+        '          <img class="d-block w-100" src="' + carObject.photo2 + '">' +
+        '        </div>' +
+        '        <div class="carousel-item">' +
+        '          <img class="d-block w-100" src="' + carObject.photo3 + '">' +
+        '        </div>' +
+        '      </div>' +
+        '      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
+        '        <span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+        '        <span class="sr-only">Previous</span>' +
+        '      </a>' +
+        '      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
+        '        <span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+        '        <span class="sr-only">Next</span>' +
+        '      </a>' +
+        '    </div>' +
+
+        '    <div class="modal-header">' +
+        '      <h5 class="modal-title font-weight-bold" id="modalCarName">' + carObject.name + '</h5>' +
+
+        '      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+        '        <span aria-hidden="true">&times;</span>' +
+        '      </button>' +
+        '    </div>' +
+
+        '    <div class="modal-body">' +
+
+        '     <div class="container">' + '<div class="row" id="modalCarFacts"</div>' +
+
+        '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' + carObject.transmission + '</p>' +
+        '       <p class="card-text col-6 font-weight-bold"><i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day</p>' +
+        '     </div>' +
+
+        '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-car"></i> ' + carObject.manufacturedDate +
+        '       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
+
+        '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine +
+        '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficency + '</p>' + '</div>' +
+
+        '     <div class="row" id="modalCarFacts"</div>' +
+        '       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
+        '       <p class="card-text col-6"><i class="fas fa-user-friends"></i> ' + carObject.minPeople + ' -' + carObject.maxPeople + ' people</p>' +
+        '     </div></div>' +
+
+        '       <p>' + carObject.carDescription + '</p>' +
+
+        '    </div>' +
+        '    <div class="modal-footer">' +
+        '      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+        '      <button type="button" class="btn btn-primary">Save changes</button>' +
+        '    </div>')
     });
   }
-
 });
 
-function initMap(origin,destination) { 
-    console.log(origin,destination);
-    if (origin === "Wellington"){
-        origin = "Wellington, New Zealand";
+function initMap(origin, destination) {
+  console.log(origin, destination);
+  if (origin === "Wellington") {
+    origin = "Wellington, New Zealand";
+  }
+  if (destination === "Auckland") {
+    origin = "Auckland, New Zealand";
+  }
+
+  var auckland = { lat: -36.8485, lng: 174.9120 };
+  var wellington = { lat: -41.2865, lng: 174.7762 };
+  var christchurch = { lat: -43.5321, lng: 172.6362 };
+  var dunedin = { lat: -45.9258577, lng: 170.1999741 };
+
+  var directionsService = new google.maps.DirectionsService;
+  var directionsRenderer = new google.maps.DirectionsRenderer;
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: -41.0058221, lng: 169.8669203 },
+    zoom: 5
+  });
+
+  var marker1 = new google.maps.Marker({ position: auckland, map: map });
+  var marker2 = new google.maps.Marker({ position: wellington, map: map });
+  var marker3 = new google.maps.Marker({ position: christchurch, map: map });
+  var marker4 = new google.maps.Marker({ position: dunedin, map: map });
+
+
+
+
+
+
+
+
+
+
+  directionsRenderer.setMap(map);
+
+  document.getElementById('toButtonConfirm').addEventListener('click', function () {
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
+  });
+
+
+  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    var waypts = [];
+    var checkboxArray = document.getElementById('waypoints');
+    for (var i = 0; i < checkboxArray.length; i++) {
+      if (checkboxArray.options[i].selected) {
+        waypts.push({
+          location: checkboxArray[i].value,
+          stopover: true
+        });
+      }
     }
-    if (destination === "Auckland"){
-        origin = "Auckland, New Zealand";
-    }
 
-    var auckland = {lat: -36.8485, lng: 174.9120};
-    var wellington = {lat: -41.2865, lng: 174.7762};
-    var christchurch = {lat: -43.5321, lng: 172.6362};
-    var dunedin = {lat: -45.9258577, lng: 170.1999741};
+    directionsService.route({
+      origin: origin,
+      destination: destination,
+      // waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: 'DRIVING'
+    }, function (response, status) {
+      if (status === 'OK') {
 
-    var directionsService = new google.maps.DirectionsService;
-    var directionsRenderer = new google.maps.DirectionsRenderer;
-        
-          map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -41.0058221, lng: 169.8669203},
-          zoom: 5
-          });
+        console.log(response);
 
-       var marker1 = new google.maps.Marker({position: auckland, map: map});
-       var marker2 = new google.maps.Marker({position: wellington, map: map});
-       var marker3 = new google.maps.Marker({position: christchurch, map: map});
-       var marker4 = new google.maps.Marker({position: dunedin, map: map});
-
-
-
-
-
-
-
-
-
-
-       directionsRenderer.setMap(map);
-
-       document.getElementById('toButtonConfirm').addEventListener('click', function() {
-         calculateAndDisplayRoute(directionsService, directionsRenderer);
-       });
-     
-
-     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-       var waypts = [];
-       var checkboxArray = document.getElementById('waypoints');
-       for (var i = 0; i < checkboxArray.length; i++) {
-         if (checkboxArray.options[i].selected) {
-           waypts.push({
-             location: checkboxArray[i].value,
-             stopover: true
-           });
-         }
-       }
-
-       directionsService.route({
-         origin: origin ,
-         destination: destination,
-         // waypoints: waypts,
-         optimizeWaypoints: true,
-         travelMode: 'DRIVING'
-       }, function(response, status) {
-         if (status === 'OK') {
-           
-           console.log(response);
-
-           directionsRenderer.setDirections(response);
-           var route = response.routes[0];
+        directionsRenderer.setDirections(response);
+        var route = response.routes[0];
         //    var summaryPanel = document.getElementById('directions-panel');
         //    summaryPanel.innerHTML = '';
         //    // For each route, display summary information.
@@ -539,18 +558,27 @@ function initMap(origin,destination) {
         //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
         //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
         //      var distance = route.legs[i].distance.text;
+<<<<<<< HEAD
              
     }
 } else {
   window.alert('Directions request failed due to ' + status);
 }
 });
+=======
+
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    })
+  }
+>>>>>>> 1a57341a4ed300eaba0b1e3621d6ea411b361be4
 }
-     
 
 
 
 
-       
-      
-    
+
+
+
+

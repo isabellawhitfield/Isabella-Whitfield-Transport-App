@@ -10,6 +10,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css" type="text/css">
 
+  <!-- FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
   <!-- Date Range Picker from: https://github.com/dangrossman/daterangepicker -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -49,20 +53,9 @@
     </div>
   </div>
 
-  <!-- Step 3 traveling to select screen -->
-  <!-- <div id="travelingToScreen" class="d-none">
-        <h1>Where do you want to go?</h1>
+ 
 
-        <div class="mapSelect">
-            <img id="kiwi4" src="images/kiwi-question.jpg">
-            <img id="kiwi3" src="images/kiwi-ok.jpg">
-            <img id="whiteMap" src="images/white-map.jpg">
-            <button type="button" id="toButtonConfirm" class="btn btn-info">Confirm Select</button>
-
-        </div>
-     </div> -->
-
-  <!-- Step 3 -->
+  <!-- Step 3 Traveling to screen -->
   <div id="travelingToScreen" class="d-none">
     <div class="mapSelect">
       <img id="whiteMap" src="images/white-map.png">
@@ -80,7 +73,7 @@
   </div>
 
 
-  <!-- Step 4 -->
+  <!-- Step 4 How many people screen-->
   <div id="numberOfPeopleScreen" class="d-none">
     <div class="container">
       <div class="row">
@@ -102,7 +95,7 @@
     <button type="button" id="peopleButtonConfirm" class="btn btn-info d-none"></button>
   </div>
 
-  <!-- Step 5 -->
+  <!-- Step 5 What dates are you traveling screen-->
   <div id="calendarScreen" class="d-none">
     <input id="tripLengthDatePicker" class="dateInput" type="text" name="daterange" value="" readonly/>
 
@@ -112,14 +105,14 @@
     <button type="button" id="timeButtonConfirm" class="btn btn-info d-none">Confirm dates</button>
   </div>
 
-  <!-- Step 6 -->
+  <!-- Step 6 Car options screen-->
   <div id="carScreen" class="d-none">
     <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
     Launch demo modal
   </button>
 
-  <!-- Modal -->
+  <!-- Modal for the cars-->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content" id="carModalContent">
@@ -133,14 +126,11 @@
 
   </div>
 
-  <div id="confirmScreen" class="xd-none">
-        <div id="map">
-
-            </div>
-    
-  </div>
-
   
+  <!--Step 7 Final screen showing: calculations, map, route-->
+  <div id="confirmScreen" class="xd-none">
+    <div id="map"></div>
+  </div>
 
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
