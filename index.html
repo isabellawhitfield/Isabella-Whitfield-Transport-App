@@ -37,7 +37,7 @@
   </div>
 
   <!-- Step 2 traveling from screen -->
-  <div id="travelingFromScreen" class="d-none">
+  <div id="travelingFromScreen" class="xd-none">
     <div class="mapSelect">
       <img id="whiteMap" src="images/white-map.png">
       <div class="marker" id="aucklandStartMarker"></div>
@@ -59,10 +59,10 @@
   <div id="travelingToScreen" class="d-none">
     <div class="mapSelect">
       <img id="whiteMap" src="images/white-map.png">
-      <div class="marker" id="aucklandEndMarker"></div>
-      <div class="marker" id="wellingtonEndMarker"></div>
-      <div class="marker" id="christchurchEndMarker"></div>
-      <div class="marker" id="dunedinEndMarker"></div>
+      <div class="marker markerDestination" id="aucklandEndMarker"></div>
+      <div class="marker markerDestination" id="wellingtonEndMarker"></div>
+      <div class="marker markerDestination" id="christchurchEndMarker"></div>
+      <div class="marker markerDestination" id="dunedinEndMarker"></div>
 
       <img id="kiwiTo" src="images/kiwi-question.jpg">
       <img id="kiwiToOk" class="d-none" src="images/kiwi-ok.jpg">
@@ -106,8 +106,11 @@
   </div>
 
   <!-- Step 6 Car options screen-->
-  <div id="carScreen" class="dx-none">
-  
+  <div id="carScreen" class="d-none">
+    <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+  </button>
 
   <!-- Modal for the cars-->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -119,15 +122,15 @@
   </div>
 
 
-    <div id="carContent"></div>
+    <div id="carContent" class="d-none"></div>
 
   </div>
+
   
   <!--Step 7 Final screen showing: calculations, map, route-->
-  <div id="confirmScreen" class="d-none">
-    <h1>I'm step 7</h1>
+  <div id="confirmScreen" class="xd-none">
+    <div id="map"></div>
   </div>
-
 
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -140,10 +143,13 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
   <!-- Swiper.js from: https://swiperjs.com/ -->
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  
 
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="js/script.js"></script>
+
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc&callback=initMap" async defer></script> -->
 </body>
 
 </html>

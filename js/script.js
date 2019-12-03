@@ -195,7 +195,7 @@ var carsAvailable = [
       "The Britz Explorer 4 Berth Motorhome includes many of our own innovative features. All 4 passengers sit up front together while travelling" +
       " New Zealand, with two purpose built seats behind the driver. At day’s end just swivel the front seats around to create a lounge area for " +
       "enjoying a drink, playing games or viewing your favourite DVD. Internal access between the driver’s cab and the rear living area," +
-      "Internal access between the driver’s cab and the rear living area, swivelling front seats, shower and toilet, refrigerator with freezer" +
+      " swivelling front seats, shower and toilet, refrigerator with freezer" +
       ", microwave, excellent kitchen facilities , LCD screen & DVD player and a filtered water system are just some of the features. Everything " +
       "you need for your New Zealand campervan holiday experience."
 
@@ -242,7 +242,8 @@ $(document).ready(function () {
     $('#travelingFromScreen').removeClass('d-none');
   });
 
-
+ var cityFrom, cityTo;
+ 
   // Step 2
   var oldFromSelection;
 
@@ -267,6 +268,10 @@ $(document).ready(function () {
 
     // Store which place was clicked
     oldFromSelection = newSelection;
+
+    console.log(cityName);
+    cityFrom = cityName;
+
   }
 
   // Click handlers for map markers
@@ -292,6 +297,7 @@ $(document).ready(function () {
     $('#travelingToScreen').removeClass('d-none');
   });
 
+ 
 
   // Step 3
   var oldToSelection;
@@ -315,6 +321,8 @@ $(document).ready(function () {
 
     // Store which place was clicked
     oldToSelection = newSelection;
+    console.log(cityName);
+    cityTo = cityName;
   }
 
   // Click handlers for map markers
@@ -338,8 +346,15 @@ $(document).ready(function () {
 
     // Show step 4
     $('#numberOfPeopleScreen').removeClass('d-none');
+    console.log(cityFrom,cityTo);
+    initMap(cityFrom, cityTo);
+    
+  
   });
-
+  var script = document.createElement('script');
+  // script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc&callback=initMap';
+  script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc';
+  document.getElementsByTagName('body')[0].appendChild(script);
 
   // Step 4
 
@@ -462,3 +477,99 @@ $(document).ready(function () {
     });
   }
 });
+
+function initMap(origin,destination) { 
+    console.log(origin,destination);
+    if (origin === "Wellington"){
+        origin = "Wellington, New Zealand";
+    }
+    if (destination === "Auckland"){
+        origin = "Auckland, New Zealand";
+    }
+
+    var auckland = {lat: -36.8485, lng: 174.9120};
+    var wellington = {lat: -41.2865, lng: 174.7762};
+    var christchurch = {lat: -43.5321, lng: 172.6362};
+    var dunedin = {lat: -45.9258577, lng: 170.1999741};
+
+    var directionsService = new google.maps.DirectionsService;
+    var directionsRenderer = new google.maps.DirectionsRenderer;
+        
+          map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -41.0058221, lng: 169.8669203},
+          zoom: 5
+          });
+
+       var marker1 = new google.maps.Marker({position: auckland, map: map});
+       var marker2 = new google.maps.Marker({position: wellington, map: map});
+       var marker3 = new google.maps.Marker({position: christchurch, map: map});
+       var marker4 = new google.maps.Marker({position: dunedin, map: map});
+
+
+
+
+
+
+
+
+
+
+       directionsRenderer.setMap(map);
+
+       document.getElementById('toButtonConfirm').addEventListener('click', function() {
+         calculateAndDisplayRoute(directionsService, directionsRenderer);
+       });
+     
+
+     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+       var waypts = [];
+       var checkboxArray = document.getElementById('waypoints');
+       for (var i = 0; i < checkboxArray.length; i++) {
+         if (checkboxArray.options[i].selected) {
+           waypts.push({
+             location: checkboxArray[i].value,
+             stopover: true
+           });
+         }
+       }
+
+       directionsService.route({
+         origin: origin ,
+         destination: destination,
+         // waypoints: waypts,
+         optimizeWaypoints: true,
+         travelMode: 'DRIVING'
+       }, function(response, status) {
+         if (status === 'OK') {
+           
+           console.log(response);
+
+           directionsRenderer.setDirections(response);
+           var route = response.routes[0];
+        //    var summaryPanel = document.getElementById('directions-panel');
+        //    summaryPanel.innerHTML = '';
+        //    // For each route, display summary information.
+        //    for (var i = 0; i < route.legs.length; i++) {
+        //      var routeSegment = i + 1;
+        //      summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+        //          '</b><br>';
+        //      summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        //      summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+        //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+        //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
+        //      var distance = route.legs[i].distance.text;
+             
+    }
+}) else {
+  window.alert('Directions request failed due to ' + status);
+}
+});
+}
+     
+
+
+
+
+       
+      
+    
