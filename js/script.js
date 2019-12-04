@@ -19,7 +19,7 @@ var carsAvailable = [
     engine: "798cc",
     carDescription: "The ride with BMW F 700 GS is not just safer but also offers especially high comfort – low weight, reduced seat height and a " +
       "lowering option. Due to its low weight and many different seat variants from high to low-slung," +
-      "  it is also particularly suited to female riders and beginners as an ideal all-round endro machine." 
+      "  it is also particularly suited to female riders and beginners as an ideal all-round endro machine."
   },
   {
     name: "Suzuki SV650",
@@ -320,38 +320,114 @@ $(document).ready(function () {
 
   });
 
-  // Step 4
+  // Step 4 number of people selection
+  var numberOfPeople;
+
+  // Filter the cars available based on number of people selected
+  var carPeopleRequirements;
+
+  function clickPerson(personIndex) {
+    for (var i = 1; i <= 6; i++) {
+      if (i <= personIndex) {
+        $('#person' + i).addClass('is-selected');
+      } else {
+        $('#person' + i).removeClass('is-selected');
+      }
+
+    }
+    numberOfPeople = personIndex;
 
 
-  // Step 5
-  // $('#test').daterangepicker({
-  //   // opens: 'left'
-  //   singleDatePicker: true,
-  //   autoUpdateInput: false,
-  // }, function(start, end, label) {
-  //   console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-  // });
-  var startDate;
-  var endDate;
+    // Hide the heading and show the button
+    $('#peopleHeading').addClass('d-none');
+    $('#peopleButtonConfirm').removeClass('d-none');
+
+    if (numberOfPeople === 1) {
+      $('#peopleButtonConfirm').text('Select ' + numberOfPeople + ' person');
+    } else {
+      $('#peopleButtonConfirm').text('Select ' + numberOfPeople + ' people');
+    }
+
+    // Filter the cars available based on number of people selected
+    carPeopleRequirements = carsAvailable.filter(function (carObject) {
+      return numberOfPeople >= carObject.minPeople &&
+        numberOfPeople <= carObject.maxPeople;
+    });
+
+  }
+  $('#person1').click(function () {
+    clickPerson(1);
+  });
+  $('#person2').click(function () {
+    clickPerson(2);
+  });
+  $('#person3').click(function () {
+    clickPerson(3);
+  });
+  $('#person4').click(function () {
+    clickPerson(4);
+  });
+  $('#person5').click(function () {
+    clickPerson(5);
+  });
+  $('#person6').click(function () {
+    clickPerson(6);
+  });
+
+  // Click handler for confirm number of people button
+  $('#peopleButtonConfirm').click(function () {
+    // Hide step 4
+    $('#numberOfPeopleScreen').addClass('d-none');
+
+    // Show step 5
+    $('#calendarScreen').removeClass('d-none');
+  });
+
+
+  // Step 5 datepicker for length of trip
+
+
   var tripLengthDays;
   $('#tripLengthDatePicker').daterangepicker({
-    // singleDatePicker: true,
     showDropdowns: true,
     opens: 'center',
     minDate: new Date(),
-    // minYear: 1901,
-    // maxYear: parseInt(moment().format('YYYY'),10)
   }, function (start, end, label) {
-    // Convert moment.js objects to date objects
-    startDate = start.toDate();
-    endDate = end.toDate();
+
 
     // Use moment.js diff to calculate amount of days between dates
     tripLengthDays = end.diff(start, 'days');
 
-    if (startDate && endDate) {
+    // find valid ranges for chosen dates, to ensure input will result in car options
+    var smallestMinDays = carPeopleRequirements[0].minDays;
+    var largestMaxDays = carPeopleRequirements[0].maxDays;
+    for (var i = 0; i < carPeopleRequirements.length; i++) {
+      var carObject = carPeopleRequirements[i];
+
+      if (carObject.minDays < smallestMinDays) {
+        smallestMinDays = carObject.minDays;
+      }
+
+      if (carObject.maxDays > largestMaxDays) {
+        largestMaxDays = carObject.maxDays;
+      }
+
+
+    }
+    // If the date range is too big or too small show error
+    if (tripLengthDays < smallestMinDays || tripLengthDays > largestMaxDays) {
+      // Show error box and set text
+      $('#invalidDateError').removeClass('d-none');
+      $('#invalidDateError').text("Please choose a date range between " + smallestMinDays + " days and " +
+        largestMaxDays + " days");
+    } else {
+      // Make sure error is hidden unless activated
+      $('#invalidDateError').addClass('d-none');
+
+      // Show date confirm button
       $('#timeHeading').addClass('d-none');
       $('#timeButtonConfirm').removeClass('d-none');
+
     }
   });
 
@@ -360,84 +436,103 @@ $(document).ready(function () {
     $('#calendarScreen').addClass('d-none');
 
     // Show step 6
+    populateCards();
     $('#carScreen').removeClass('d-none');
   });
 
 
-  // Step 6
-  for (var i = 0; i < carsAvailable.length; i++) {
-    var carObject = carsAvailable[i];
-    var id = 'carCard' + i;
+  // Step 6 Car options
+  var selectedCar;
+  function populateCards() {
+    for (var i = 0; i < carPeopleRequirements.length; i++) {
+      var carObject = carPeopleRequirements[i];
+      var id = 'carCard' + i;
 
-    $('#carContent').append('<div class="card card--car" id="' + id + '" data-toggle="modal" data-target="#exampleModalCenter"> ' +
-      '<img src="' + carObject.photo1 + '" class="card-img-top">' +
-      '<div class="card-body ">' +
-      '<h5 class="card-title font-weight-bold">' + carObject.name + '</h5>' +
-      '<div class="row">' +
-      '<p class="card-text col-6">' + carObject.transmission + '</p>' +
-      '<p class="card-text text-right col-6 font-weight-bold">$' + carObject.price + '/day</p>' +
-      '</div>' +
-      '</div>' +
-      '</div>');
+      var isElligible = tripLengthDays >= carObject.minDays &&
+        tripLengthDays <= carObject.maxDays;
 
-    $('#' + id).click(carObject, function (event) {
-      var carObject = event.data;
-      $('#carModalContent').html('<div id="carouselExampleControls" class="carousel slide carousel--car" data-ride="carousel">' +
-        '      <div class="carousel-inner">' +
-        '        <div class="carousel-item active">' +
-        '          <img class="d-block w-100" src="' + carObject.photo1 + '">' +
-        '        </div>' +
-        '        <div class="carousel-item">' +
-        '          <img class="d-block w-100" src="' + carObject.photo2 + '">' +
-        '        </div>' +
-        '        <div class="carousel-item">' +
-        '          <img class="d-block w-100" src="' + carObject.photo3 + '">' +
-        '        </div>' +
-        '      </div>' +
-        '      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
-        '        <span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
-        '        <span class="sr-only">Previous</span>' +
-        '      </a>' +
-        '      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
-        '        <span class="carousel-control-next-icon" aria-hidden="true"></span>' +
-        '        <span class="sr-only">Next</span>' +
-        '      </a>' +
-        '    </div>' +
+      if (isElligible) {
 
-        '    <div class="modal-header">' +
-        '      <h5 class="modal-title font-weight-bold" id="modalCarName">' + carObject.name + '</h5>' +
+        $('#carContent').append('<div class="card card--car" id="' + id + '" data-toggle="modal" data-target="#exampleModalCenter"> ' +
+          '<img src="' + carObject.photo1 + '" class="card-img-top">' +
+          '<div class="card-body ">' +
+          '<h5 class="card-title font-weight-bold">' + carObject.name + '</h5>' +
+          '<div class="row">' +
+          '<p class="card-text col-6">' + carObject.transmission + '</p>' +
+          '<p class="card-text text-right col-6 font-weight-bold">$' + carObject.price + '/day</p>' +
+          '</div>' +
+          '</div>' +
+          '</div>');
 
-        '      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-        '        <span aria-hidden="true">&times;</span>' +
-        '      </button>' +
-        '    </div>' +
+        $('#' + id).click(carObject, function (event) {
+          var carObject = event.data;
+          $('#carModalContent').html('<div id="carouselExampleControls" class="carousel slide carousel--car" data-ride="carousel">' +
+            '      <div class="carousel-inner">' +
+            '        <div class="carousel-item active">' +
+            '          <img class="d-block w-100" src="' + carObject.photo1 + '">' +
+            '        </div>' +
+            '        <div class="carousel-item">' +
+            '          <img class="d-block w-100" src="' + carObject.photo2 + '">' +
+            '        </div>' +
+            '        <div class="carousel-item">' +
+            '          <img class="d-block w-100" src="' + carObject.photo3 + '">' +
+            '        </div>' +
+            '      </div>' +
+            '      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
+            '        <span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+            '        <span class="sr-only">Previous</span>' +
+            '      </a>' +
+            '      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
+            '        <span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+            '        <span class="sr-only">Next</span>' +
+            '      </a>' +
+            '    </div>' +
 
-        '    <div class="modal-body">' +
+            '    <div class="modal-header">' +
+            '      <h5 class="modal-title font-weight-bold" id="modalCarName">' + carObject.name + '</h5>' +
 
-        '     <div class="container">' + '<div class="row" id="modalCarFacts"</div>' +
+            '      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '        <span aria-hidden="true">&times;</span>' +
+            '      </button>' +
+            '    </div>' +
 
-        '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' + carObject.transmission + '</p>' +
-        '       <p class="card-text col-6 font-weight-bold"><i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day</p>' +
-        '     </div>' +
+            '    <div class="modal-body">' +
 
-        '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-car"></i> ' + carObject.manufacturedDate +
-        '       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
+            '     <div class="container">' + '<div class="row" id="modalCarFacts"</div>' +
 
-        '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine +
-        '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficency + '</p>' + '</div>' +
+            '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' + carObject.transmission + '</p>' +
+            '       <p class="card-text col-6 font-weight-bold"><i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day</p>' +
+            '     </div>' +
 
-        '     <div class="row" id="modalCarFacts"</div>' +
-        '       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
-        '       <p class="card-text col-6"><i class="fas fa-user-friends"></i> ' + carObject.minPeople + ' -' + carObject.maxPeople + ' people</p>' +
-        '     </div></div>' +
+            '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-car"></i> ' + carObject.manufacturedDate +
+            '       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
 
-        '       <p>' + carObject.carDescription + '</p>' +
+            '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine +
+            '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficency + '</p>' + '</div>' +
 
-        '    </div>' +
-        '    <div class="modal-footer">' +
-        '      <button type="button" class="btn btn-primary">Select this car</button>' +
-        '    </div>')
-    });
+            '     <div class="row" id="modalCarFacts"</div>' +
+            '       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
+            '       <p class="card-text col-6"><i class="fas fa-user-friends"></i> ' + carObject.minPeople + ' -' + carObject.maxPeople + ' people</p>' +
+            '     </div></div>' +
+
+            '       <p>' + carObject.carDescription + '</p>' +
+
+            '    </div>' +
+            '    <div class="modal-footer">' +
+            '      <button id="selectCarButton" type="button" data-dismiss="modal" class="btn btn-primary">Select this car</button>' +
+            '    </div>')
+            $('#selectCarButton').click(function() {
+              // Store selected car
+              selectedCar = carObject;
+                // Hide step 6
+                $('#carScreen').addClass('d-none');
+            
+                // Show step 7
+                $('#confirmScreen').removeClass('d-none');
+            });
+        });
+      }
+    }
   }
 });
 
@@ -447,27 +542,27 @@ document.getElementsByTagName('body')[0].appendChild(script);
 
 function initMap(origin, destination) {
   console.log(origin, destination);
-//   if (origin === "Auckland") {
-//     origin = "Auckland, New Zealand";
-//   }
-// //  } else if (origin === "Wellington") {
-// //     origin = "Wellington, New Zealand";
-// //   } else if (origin === "Dunedin") {
-// //     origin = "Christchurch, New Zealand";
-// //   } else if (origin === "Dunedin") {
-// //     origin = "Dunedin, New Zealand";
-// //   } 
+  //   if (origin === "Auckland") {
+  //     origin = "Auckland, New Zealand";
+  //   }
+  // //  } else if (origin === "Wellington") {
+  // //     origin = "Wellington, New Zealand";
+  // //   } else if (origin === "Dunedin") {
+  // //     origin = "Christchurch, New Zealand";
+  // //   } else if (origin === "Dunedin") {
+  // //     origin = "Dunedin, New Zealand";
+  // //   } 
 
 
 
-//   if (destination === "Auckland") {
-//     destination = "Auckland, New Zealand";
-//   }
+  //   if (destination === "Auckland") {
+  //     destination = "Auckland, New Zealand";
+  //   }
 
-//   var auckland = { lat: -36.8485, lng: 174.9120 };
-//   var wellington = { lat: -41.2865, lng: 174.7762 };
-//   var christchurch = { lat: -43.5321, lng: 172.6362 };
-//   var dunedin = { lat: -45.9258577, lng: 170.1999741 };
+  //   var auckland = { lat: -36.8485, lng: 174.9120 };
+  //   var wellington = { lat: -41.2865, lng: 174.7762 };
+  //   var christchurch = { lat: -43.5321, lng: 172.6362 };
+  //   var dunedin = { lat: -45.9258577, lng: 170.1999741 };
 
   var directionsService = new google.maps.DirectionsService;
   var directionsRenderer = new google.maps.DirectionsRenderer;
@@ -477,10 +572,10 @@ function initMap(origin, destination) {
     zoom: 5
   });
 
-//   var marker1 = new google.maps.Marker({ position: auckland, map: map });
-//   var marker2 = new google.maps.Marker({ position: wellington, map: map });
-//   var marker3 = new google.maps.Marker({ position: christchurch, map: map });
-//   var marker4 = new google.maps.Marker({ position: dunedin, map: map });
+  //   var marker1 = new google.maps.Marker({ position: auckland, map: map });
+  //   var marker2 = new google.maps.Marker({ position: wellington, map: map });
+  //   var marker3 = new google.maps.Marker({ position: christchurch, map: map });
+  //   var marker4 = new google.maps.Marker({ position: dunedin, map: map });
 
 
 
@@ -489,60 +584,60 @@ function initMap(origin, destination) {
 
   directionsRenderer.setMap(map);
 
-//   document.getElementById('test').addEventListener('click', function () {
-//     console.log("button");
-//     console.log(origin, destination);
-    // calculateAndDisplayRoute(directionsService, directionsRenderer);
-//   });
+  //   document.getElementById('test').addEventListener('click', function () {
+  //     console.log("button");
+  //     console.log(origin, destination);
+  // calculateAndDisplayRoute(directionsService, directionsRenderer);
+  //   });
 
 
-//   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-//     var waypts = [];
-    // var checkboxArray = document.getElementById('waypoints');
-    // for (var i = 0; i < checkboxArray.length; i++) {
-    //   if (checkboxArray.options[i].selected) {
-    //     waypts.push({
-    //       location: checkboxArray[i].value,
-    //       stopover: true
-    //     });
-    //   }
-    // } 
-console.log(origin, destination);
-    directionsService.route({
-      origin: origin,
-      destination: destination,
-      // waypoints: waypts,
-      optimizeWaypoints: true,
-      travelMode: 'DRIVING'
-    }, function (response, status) {
-      if (status === 'OK') {
+  //   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+  //     var waypts = [];
+  // var checkboxArray = document.getElementById('waypoints');
+  // for (var i = 0; i < checkboxArray.length; i++) {
+  //   if (checkboxArray.options[i].selected) {
+  //     waypts.push({
+  //       location: checkboxArray[i].value,
+  //       stopover: true
+  //     });
+  //   }
+  // } 
+  console.log(origin, destination);
+  directionsService.route({
+    origin: origin,
+    destination: destination,
+    // waypoints: waypts,
+    optimizeWaypoints: true,
+    travelMode: 'DRIVING'
+  }, function (response, status) {
+    if (status === 'OK') {
 
-        console.log(response);
+      console.log(response);
 
-        directionsRenderer.setDirections(response);
-        var route = response.routes[0];
-        var firstRouteLeg = route.legs[0];
+      directionsRenderer.setDirections(response);
+      var route = response.routes[0];
+      var firstRouteLeg = route.legs[0];
 
-        console.log("Driving distance is " + firstRouteLeg.distance.text + " (" + firstRouteLeg.duration.text + ").");
-        //    var summaryPanel = document.getElementById('directions-panel');
-        //    summaryPanel.innerHTML = '';
-        //    // For each route, display summary information.
-        //    for (var i = 0; i < route.legs.length; i++) {
-        //      var routeSegment = i + 1;
-        //      summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-        //          '</b><br>';
-        //      summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-        //      summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-        //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-        //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-        //    var distance = route.legs[i].distance.text;
-        //    console.log(distance);
+      console.log("Driving distance is " + firstRouteLeg.distance.text + " (" + firstRouteLeg.duration.text + ").");
+      //    var summaryPanel = document.getElementById('directions-panel');
+      //    summaryPanel.innerHTML = '';
+      //    // For each route, display summary information.
+      //    for (var i = 0; i < route.legs.length; i++) {
+      //      var routeSegment = i + 1;
+      //      summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+      //          '</b><br>';
+      //      summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+      //      summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+      //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
+      //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
+      //    var distance = route.legs[i].distance.text;
+      //    console.log(distance);
 
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    })
-  }
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  })
+}
 
 
 
