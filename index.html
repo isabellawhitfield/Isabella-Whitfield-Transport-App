@@ -105,7 +105,7 @@
     <div id="invalidDateError" class="d-none"></div>
 
     <img id="kiwiTime" src="images/kiwi-watch.png">
-  
+
     <h1 id="timeHeading">What dates are you travelling?</h1>
     <button type="button" id="timeButtonConfirm" class="btn btn-info d-none">Confirm dates</button>
   </div>
@@ -132,7 +132,9 @@
   <!--Step 7 Final screen showing: calculations, map, route-->
   <div id="confirmScreen" class="d-none">
     <div id="map"></div>
-    <div id="directions-panel"></div>
+
+    <div id="directionsPanel" class="container"></div>
+
   </div>
 
 
@@ -156,8 +158,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
+  <script src="js/api_key.js"></script>
   <script src="js/script.js"></script>
-  <script src="js/config.json"></script>
 
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc&callback=initMap" async defer></script> -->
 </body>

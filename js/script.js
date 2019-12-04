@@ -8,7 +8,7 @@ var carsAvailable = [
     photo2: "images/motorbike-bmw-2.jpg",
     photo3: "images/motorbike-bmw-3.jpg",
     fuelType: "Petrol 95",
-    fuelEfficency: 3.71,
+    fuelEfficiency: 3.71,
     transmission: "Manual",
     minPeople: 1,
     maxPeople: 1,
@@ -28,7 +28,7 @@ var carsAvailable = [
     photo2: "images/motorbike-suzuki-2.jpeg",
     photo3: "images/motorbike-suzuki-3.jpg",
     fuelType: "Petrol 87",
-    fuelEfficency: 3.71,
+    fuelEfficiency: 3.71,
     transmission: "Manual",
     minPeople: 1,
     maxPeople: 1,
@@ -49,7 +49,7 @@ var carsAvailable = [
     photo2: "images/small-corolla-2.jpg",
     photo3: "images/small-corolla-3.jpg",
     fuelType: "Petrol",
-    fuelEfficency: 8.5,
+    fuelEfficiency: 8.5,
     transmission: 'Automatic',
     minPeople: 1,
     maxPeople: 2,
@@ -70,7 +70,7 @@ var carsAvailable = [
     photo2: "images/small-yaris-2.jpg",
     photo3: "images/small-yaris-3.jpg",
     fuelType: "Petrol",
-    fuelEfficency: 8.5,
+    fuelEfficiency: 8.5,
     transmission: "Manual",
     minPeople: 1,
     maxPeople: 2,
@@ -91,7 +91,7 @@ var carsAvailable = [
     photo2: "images/large-toyota-2.jpg",
     photo3: "images/large-toyota-3.jpg",
     fuelType: "Petrol",
-    fuelEfficency: 9.7,
+    fuelEfficiency: 9.7,
     transmission: "Automatic",
     minPeople: 1,
     maxPeople: 5,
@@ -111,7 +111,7 @@ var carsAvailable = [
     photo2: "images/large-wagon-2.jpg",
     photo3: "images/large-wagon-3.jpg",
     fuelType: "Petrol",
-    fuelEfficency: 9.7,
+    fuelEfficiency: 9.7,
     transmission: "Automatic",
     minPeople: 1,
     maxPeople: 5,
@@ -132,7 +132,7 @@ var carsAvailable = [
     photo2: "images/home-ford-2.jpeg",
     photo3: "images/home-ford-3.jpg",
     fuelType: "Diesel",
-    fuelEfficency: 17,
+    fuelEfficiency: 17,
     transmission: "Manual",
     minPeople: 2,
     maxPeople: 6,
@@ -153,7 +153,7 @@ var carsAvailable = [
     photo2: "images/home-britz-2.jpg",
     photo3: "images/home-britz-3.jpg",
     fuelType: "Diesel",
-    fuelEfficency: 17,
+    fuelEfficiency: 17,
     transmission: "Automatic",
     minPeople: 2,
     maxPeople: 6,
@@ -315,9 +315,6 @@ $(document).ready(function () {
     // Show step 4
     $('#numberOfPeopleScreen').removeClass('d-none');
     console.log(cityFrom, cityTo);
-    initMap(cityFrom, cityTo);
-
-
   });
 
   // Step 4 number of people selection
@@ -508,7 +505,7 @@ $(document).ready(function () {
             '       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
 
             '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine +
-            '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficency + '</p>' + '</div>' +
+            '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficiency + '</p>' + '</div>' +
 
             '     <div class="row" id="modalCarFacts"</div>' +
             '       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
@@ -521,130 +518,91 @@ $(document).ready(function () {
             '    <div class="modal-footer">' +
             '      <button id="selectCarButton" type="button" data-dismiss="modal" class="btn btn-primary">Select this car</button>' +
             '    </div>')
-            $('#selectCarButton').click(function() {
-              // Store selected car
-              selectedCar = carObject;
-                // Hide step 6
-                $('#carScreen').addClass('d-none');
-            
-                // Show step 7
-                $('#confirmScreen').removeClass('d-none');
-            });
+          $('#selectCarButton').click(function () {
+            // Store selected car
+            selectedCar = carObject;
+            // Hide step 6
+            $('#carScreen').addClass('d-none');
+
+            // Show step 7
+            $('#confirmScreen').removeClass('d-none');
+            initMap(cityFrom, cityTo);
+          });
         });
       }
     }
   }
+
+  function initMap(origin, destination) {
+    console.log(origin, destination);
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer();
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: -41.0058221, lng: 169.8669203 },
+      zoom: 5
+    });
+
+
+    directionsRenderer.setMap(map);
+
+
+    directionsService.route({
+      origin: origin,
+      destination: destination,
+      // waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: 'DRIVING'
+    }, function (response, status) {
+      if (status === 'OK') {
+
+        console.log(response);
+
+        directionsRenderer.setDirections(response);
+        var route = response.routes[0];
+        var firstRouteLeg = route.legs[0];
+
+        // Calculations about the trip
+        var distanceTravelled = firstRouteLeg.distance.text;
+        var timeTaken = firstRouteLeg.duration.text;
+        var litresUsed = selectedCar.fuelEfficiency * (firstRouteLeg.distance.value / 100000);
+        // Made-up constant for the price of fuel
+        var fuelCostPerLitre = 2.35;
+        var fuelCostTotal = litresUsed * fuelCostPerLitre;
+        var carHireCostTotal = selectedCar.price * tripLengthDays;
+
+        // Insert summaries into the page
+        $('#directionsPanel').html(
+          '<div class="row">' +
+          '<div class="col-6">Distance</div>' +
+          '<div class="col-6 text-right">' + distanceTravelled + '</div>' +
+          '</div>' +
+          '<div class="row">' +
+          '<div class="col-6">Time estimate</div>' +
+          '<div class="col-6 text-right">' + timeTaken + '</div>' +
+          '</div>' +
+          '<div class="row">' +
+          '<div class="col-6">Total fuel (estimate)</div>' +
+          '<div class="col-6 text-right">' + Math.round(litresUsed) + 'L</div>' +
+          '</div>' +
+          '<div class="row">' +
+          '<div class="col-6">Fuel cost</div>' +
+          '<div class="col-6 text-right">$' + Math.round(fuelCostTotal) + '</div>' +
+          '</div>' +
+          '<div class="row">' +
+          '<div class="col-6">Car hire cost</div>' +
+          '<div class="col-6 text-right">$' + Math.round(carHireCostTotal) + ' (total)</div>' +
+          '</div>'
+        );
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    })
+  }
 });
 
+// Load google maps script
 var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc'
+script.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY;
 document.getElementsByTagName('body')[0].appendChild(script);
-
-function initMap(origin, destination) {
-  console.log(origin, destination);
-  //   if (origin === "Auckland") {
-  //     origin = "Auckland, New Zealand";
-  //   }
-  // //  } else if (origin === "Wellington") {
-  // //     origin = "Wellington, New Zealand";
-  // //   } else if (origin === "Dunedin") {
-  // //     origin = "Christchurch, New Zealand";
-  // //   } else if (origin === "Dunedin") {
-  // //     origin = "Dunedin, New Zealand";
-  // //   } 
-
-
-
-  //   if (destination === "Auckland") {
-  //     destination = "Auckland, New Zealand";
-  //   }
-
-  //   var auckland = { lat: -36.8485, lng: 174.9120 };
-  //   var wellington = { lat: -41.2865, lng: 174.7762 };
-  //   var christchurch = { lat: -43.5321, lng: 172.6362 };
-  //   var dunedin = { lat: -45.9258577, lng: 170.1999741 };
-
-  var directionsService = new google.maps.DirectionsService;
-  var directionsRenderer = new google.maps.DirectionsRenderer;
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: -41.0058221, lng: 169.8669203 },
-    zoom: 5
-  });
-
-  //   var marker1 = new google.maps.Marker({ position: auckland, map: map });
-  //   var marker2 = new google.maps.Marker({ position: wellington, map: map });
-  //   var marker3 = new google.maps.Marker({ position: christchurch, map: map });
-  //   var marker4 = new google.maps.Marker({ position: dunedin, map: map });
-
-
-
-
-
-
-  directionsRenderer.setMap(map);
-
-  //   document.getElementById('test').addEventListener('click', function () {
-  //     console.log("button");
-  //     console.log(origin, destination);
-  // calculateAndDisplayRoute(directionsService, directionsRenderer);
-  //   });
-
-
-  //   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-  //     var waypts = [];
-  // var checkboxArray = document.getElementById('waypoints');
-  // for (var i = 0; i < checkboxArray.length; i++) {
-  //   if (checkboxArray.options[i].selected) {
-  //     waypts.push({
-  //       location: checkboxArray[i].value,
-  //       stopover: true
-  //     });
-  //   }
-  // } 
-  console.log(origin, destination);
-  directionsService.route({
-    origin: origin,
-    destination: destination,
-    // waypoints: waypts,
-    optimizeWaypoints: true,
-    travelMode: 'DRIVING'
-  }, function (response, status) {
-    if (status === 'OK') {
-
-      console.log(response);
-
-      directionsRenderer.setDirections(response);
-      var route = response.routes[0];
-      var firstRouteLeg = route.legs[0];
-
-      console.log("Driving distance is " + firstRouteLeg.distance.text + " (" + firstRouteLeg.duration.text + ").");
-      //    var summaryPanel = document.getElementById('directions-panel');
-      //    summaryPanel.innerHTML = '';
-      //    // For each route, display summary information.
-      //    for (var i = 0; i < route.legs.length; i++) {
-      //      var routeSegment = i + 1;
-      //      summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-      //          '</b><br>';
-      //      summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-      //      summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-      //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-      //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-      //    var distance = route.legs[i].distance.text;
-      //    console.log(distance);
-
-    } else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  })
-}
-
-
-
-
-
-
-
-
-
-
