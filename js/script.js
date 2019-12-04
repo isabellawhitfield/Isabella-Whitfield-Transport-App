@@ -533,6 +533,11 @@ $(document).ready(function () {
     }
   }
 
+  // Step 7 View map
+  $('#confirmBookingButton').click(function() {
+    alert("You're all booked! Have a great trip!");
+  });
+
   function initMap(origin, destination) {
     console.log(origin, destination);
 

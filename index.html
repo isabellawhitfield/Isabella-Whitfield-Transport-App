@@ -26,115 +26,136 @@
 </head>
 
 <body>
-  <!-- Step 1 landing screen -->
-  <div id="startScreen">
-    <h1>Welcome to Tourism NZ Transport</h1>
-    <p>Lets make your trip to NZ the best vacation ever! We will find the best vehicle hire option for you,
-      plan your route, calculate all costs, consider all factors so that you can just sit back and relax, you deserve
-      it. </p>
-
-    <img id="kiwi1" src="images/kiwi-start.jpg">
-
-    <button type="button" id="startButton" class="btn btn-info">Lets go!</button>
-  </div>
-
-  <!-- Step 2 traveling from screen -->
-  <div id="travelingFromScreen" class="d-none">
-    <div class="mapSelect">
-      <img id="whiteMap" src="images/white-map.png">
-      <div class="marker" id="aucklandStartMarker"></div>
-      <div class="marker" id="wellingtonStartMarker"></div>
-      <div class="marker" id="christchurchStartMarker"></div>
-      <div class="marker" id="dunedinStartMarker"></div>
-
-      <img id="kiwiFrom" src="images/kiwi-from.jpg">
-      <img id="kiwiFromOk" class="d-none" src="images/kiwi-ok.jpg">
-
-      <h1 id="journeyStartHeading">Where will your journey start?</h1>
-      <button type="button" id="fromButtonConfirm" class="btn btn-info d-none"></button>
-    </div>
-  </div>
-
-
-
-  <!-- Step 3 Traveling to screen -->
-  <div id="travelingToScreen" class="d-none">
-    <div class="mapSelect">
-      <img id="whiteMap" src="images/white-map.png">
-      <div class="marker markerDestination" id="aucklandEndMarker"></div>
-      <div class="marker markerDestination" id="wellingtonEndMarker"></div>
-      <div class="marker markerDestination" id="christchurchEndMarker"></div>
-      <div class="marker markerDestination" id="dunedinEndMarker"></div>
-
-      <img id="kiwiTo" src="images/kiwi-question.jpg">
-      <img id="kiwiToOk" class="d-none" src="images/kiwi-ok.jpg">
-
-      <h1 id="journeyEndHeading">Where do you want to go?</h1>
-
-      <button type="button" id="toButtonConfirm" class="btn btn-info d-none"></button>
-    </div>
-  </div>
-
-
-  <!-- Step 4 How many people screen-->
-  <div id="numberOfPeopleScreen" class="d-none">
-    <div class="container">
-      <div class="row">
-        <div id="person1" class="person person1 col-4"></div>
-        <div id="person2" class="person person2 col-4"></div>
-        <div id="person3" class="person person3 col-4"></div>
+  <!-- Header -->
+  <div class="container mb-5 mt-3">
+    <div class="row">
+      <div id="backButton" class="col-3">
+        <span class="d-none">← Back</span>
       </div>
-
-      <div class="row">
-        <div id="person4" class="person person4 col-4"></div>
-        <div id="person5" class="person person5 col-4"></div>
-        <div id="person6" class="person person6 col-4"></div>
+      <div class="col-9 text-right">
+        <img src="images/pure-new-zealand-dual-logo.svg" alt="100% Pure NZ logo">
       </div>
     </div>
-
-    <img id="kiwiTo" src="images/kiwi-people.jpg">
-
-    <h1 id="peopleHeading">How many people are travelling?</h1>
-    <button type="button" id="peopleButtonConfirm" class="btn btn-info d-none"></button>
   </div>
 
-  <!-- Step 5 What dates are you traveling screen-->
-  <div id="calendarScreen" class="d-none">
-    <input id="tripLengthDatePicker" class="dateInput" type="text" name="daterange" value="" readonly />
+  <div class="text-center container">
+    <!-- Step 1 landing screen -->
+    <div id="startScreen">
+      <h1 class="mb-3 text-white">Welcome to Tourism NZ Transport</h1>
 
-    <div id="invalidDateError" class="d-none"></div>
+      <p class="mb-3 text-white">Lets make your trip to NZ the best vacation ever! We will find the best vehicle hire option for you,
+        plan your route, calculate all costs, consider all factors so that you can just sit back and relax, you deserve
+        it. </p>
 
-    <img id="kiwiTime" src="images/kiwi-watch.png">
+      <img id="kiwi1" class="centeredImage mb-3" src="images/kiwi-start.jpg">
 
-    <h1 id="timeHeading">What dates are you travelling?</h1>
-    <button type="button" id="timeButtonConfirm" class="btn btn-info d-none">Confirm dates</button>
-  </div>
+      <button type="button" id="startButton" class="btn btn-lg btn-info">Lets go!</button>
+    </div>
 
-  <!-- Step 6 Car options screen-->
-  <div id="carScreen" class="d-none">
 
-    <!-- Modal for the cars-->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" id="carModalContent">
+    <!-- Step 2 traveling from screen -->
+    <div id="travelingFromScreen" class="d-none">
+      <div class="iconMapContainer mb-5">
+        <img id="whiteMap" class="iconMap" src="images/white-map.png">
+        <div class="iconMapMarker markerAuckland" id="aucklandStartMarker"></div>
+        <div class="iconMapMarker markerWellington" id="wellingtonStartMarker"></div>
+        <div class="iconMapMarker markerChristchurch" id="christchurchStartMarker"></div>
+        <div class="iconMapMarker markerDunedin" id="dunedinStartMarker"></div>
 
+        <img id="kiwiFrom" class="iconMapKiwi" src="images/kiwi-from.jpg">
+        <img id="kiwiFromOk" class="iconMapKiwi d-none" src="images/kiwi-ok.jpg">
+      </div>
+
+
+      <h1 id="journeyStartHeading" class="text-white">Where will your journey start?</h1>
+      <button type="button" id="fromButtonConfirm" class="btn btn-lg btn-info d-none"></button>
+    </div>
+
+
+    <!-- Step 3 Traveling to screen -->
+    <div id="travelingToScreen" class="d-none">
+      <div class="iconMapContainer mb-5">
+        <img id="whiteMap" class="iconMap" src="images/white-map.png">
+        <div class="iconMapMarker markerAuckland" id="aucklandEndMarker"></div>
+        <div class="iconMapMarker markerWellington" id="wellingtonEndMarker"></div>
+        <div class="iconMapMarker markerChristchurch" id="christchurchEndMarker"></div>
+        <div class="iconMapMarker markerDunedin" id="dunedinEndMarker"></div>
+
+        <img id="kiwiTo" class="iconMapKiwi" src="images/kiwi-question.png">
+        <img id="kiwiToOk" class="iconMapKiwi d-none" src="images/kiwi-ok.jpg">
+      </div>
+
+      <h1 id="journeyEndHeading" class="text-white">Where do you want to go?</h1>
+      <button type="button" id="toButtonConfirm" class="btn btn-lg btn-info d-none"></button>
+    </div>
+
+
+    <!-- Step 4 How many people screen-->
+    <div id="numberOfPeopleScreen" class="d-none">
+      <div class="mb-3">
+        <div class="row">
+          <div id="person1" class="person person1 col-4"></div>
+          <div id="person2" class="person person2 col-4"></div>
+          <div id="person3" class="person person3 col-4"></div>
+        </div>
+
+        <div class="row">
+          <div id="person4" class="person person4 col-4"></div>
+          <div id="person5" class="person person5 col-4"></div>
+          <div id="person6" class="person person6 col-4"></div>
         </div>
       </div>
+
+      <img id="kiwiPeople" class="centeredImage mb-3" src="images/kiwi-people.png">
+
+
+      <h1 id="peopleHeading" class="text-white">How many people are travelling?</h1>
+      <button type="button" id="peopleButtonConfirm" class="btn btn-lg btn-info d-none"></button>
     </div>
 
 
-    <div id="carContent"></div>
+    <!-- Step 5 What dates are you traveling screen-->
+    <div id="calendarScreen" class="d-none">
+      <input id="tripLengthDatePicker" class="dateInput mb-3" type="text" name="daterange" value="" readonly />
 
-  </div>
+      <div id="invalidDateError" class="d-none mb-3"></div>
+
+      <img id="kiwiTime" class="centeredImage mb-3" src="images/kiwi-watch.png">
+
+      <h1 id="timeHeading" class="text-white">What dates are you travelling?</h1>
+      <button type="button" id="timeButtonConfirm" class="btn btn-lg btn-info d-none">Confirm dates</button>
+    </div>
 
 
-  <!--Step 7 Final screen showing: calculations, map, route-->
-  <div id="confirmScreen" class="d-none">
-    <div id="map"></div>
+    <!-- Step 6 Car options screen-->
+    <div id="carScreen" class="d-none">
 
-    <div id="directionsPanel" class="container"></div>
+      <!-- Modal for the cars-->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content" id="carModalContent">
 
+          </div>
+        </div>
+      </div>
+
+
+      <div id="carContent"></div>
+
+    </div>
+
+
+    <!--Step 7 Final screen showing: calculations, map, route-->
+    <div id="confirmScreen" class="d-none">
+      <div id="map" class="mb-3"></div>
+
+      <div id="directionsPanel" class="text-white mb-3"></div>
+
+      <img src="images/kiwi-see-you.png" class="centeredImage mb-3">
+      <button id="confirmBookingButton" class="btn btn-lg btn-info mb-3">Confirm booking</button>
+
+    </div>
   </div>
 
 

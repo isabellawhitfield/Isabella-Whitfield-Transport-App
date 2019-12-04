@@ -1,0 +1,50 @@
+.iconMapContainer {
+  position: relative;
+  width: 355px;
+  height: 479px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.iconMap {
+  // width: 355px;
+  // height: 479px;
+  width: 100%;
+  height: 100%;
+
+}
+
+.iconMapMarker {
+  width: 90px;
+  height: 90px;
+  background-image: url('../images/place-marker-blue.png');
+  position: absolute;
+}
+
+.iconMapMarker.is-selected {
+  background-image: url('../images/selected-marker-green.png');
+}
+
+.markerAuckland {
+  top: 4%;
+  left: 55%;
+}
+.markerWellington {
+  top: 37%;
+  left: 55%;
+}
+.markerChristchurch {
+  top: 55%;
+  left: 39%;
+}
+.markerDunedin {
+  top: 72%;
+  left: 25%;
+}
+
+.iconMapKiwi {
+  position: absolute;
+  width: 150px;
+  top: 72%;
+  left: 55%;
+}
