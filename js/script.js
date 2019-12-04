@@ -18,11 +18,8 @@ var carsAvailable = [
     manufacturedDate: "2016",
     engine: "798cc",
     carDescription: "The ride with BMW F 700 GS is not just safer but also offers especially high comfort – low weight, reduced seat height and a " +
-      "lowering option. Ready for carefree, fun and comfortable motorcycling? Especially the BMW F 700 GS’ 75bhp engine and its outstanding handling" +
-      " riding becomes child’s play. Due to its low weight and many different seat variants from high to low-slung, it is also particularly suited to " +
-      "female riders and beginners as an ideal all-round endro machine."
-
-
+      "lowering option. Due to its low weight and many different seat variants from high to low-slung," +
+      "  it is also particularly suited to female riders and beginners as an ideal all-round endro machine." 
   },
   {
     name: "Suzuki SV650",
@@ -65,9 +62,8 @@ var carsAvailable = [
     price: 129,
     manufacturedDate: "2018",
     engine: "2000cc",
-    carDescription: "The 2019 Corolla hatch continues to present the practicality and efficiency it has delivered to generations of New Zealanders, " +
-      "with added technology and contemporary style. The Corolla GX hatch rides on stylish 16” alloy wheels which, combined with Toyota’s strenuous " +
-      "efforts to mitigate unwanted road noise, provide for a very comfortable driving experience.You will also note just how peaceful it is inside the " +
+    carDescription: "The Corolla GX hatch rides on stylish 16” alloy wheels which, combined with Toyota’s strenuous " +
+      "efforts to mitigate unwanted road noise, provide for a very comfortable driving experience. You will also note just how peaceful it is inside the " +
       "Corolla hatch’s cabin; Toyota has worked hard to improve on silencing material used in the model’s interior panels to ensure the quietest possible " +
       "ride, regardless of the road surface you are travelling on."
 
@@ -91,10 +87,9 @@ var carsAvailable = [
     price: 129,
     manufacturedDate: "2017",
     engine: "1300cc",
-    carDescription: "Yaris Hatch is bursting with funky features and cool technologies. Great looking and with a bubbly personality to match, " +
-      "it’s not only a fun way to get around, but safe and stylish too. The 5-star ANCAP rated Yaris range gives you peace of mind while you’re " +
-      "out and about getting on with your day. Its standard levels of safety technology have to be seen to be believed. Hop in; it’s easy. And " +
-      "you simply won’t believe you’re sitting in Toyota’s most compact hatchback. Look around the cabin and not only will you be impressed with " +
+    carDescription: "Yaris Hatch is bursting with funky features and cool technologies. It’s not only a fun way to get around, but safe and stylish too." +
+      " The 5-star ANCAP rated Yaris range gives you peace of mind while you’re out and about." +
+      " Look around the cabin and not only will you be impressed with " +
       "the quality materials on offer, you’ll also note that this is one compact car with comfortable dimensions."
 
 
@@ -151,7 +146,7 @@ var carsAvailable = [
     name: "Ford Coachmen Freelancer",
     type: "Motorhome",
     photo1: "images/home-ford-1.jpg",
-    photo2: "images/home-ford-2.jpg",
+    photo2: "images/home-ford-2.jpeg",
     photo3: "images/home-ford-3.jpg",
     fuelType: "Diesel",
     fuelEfficency: 17,
@@ -164,13 +159,9 @@ var carsAvailable = [
     manufacturedDate: "2011",
     engine: "198hp",
     carDescription: "With all the comforts of home, this offers the ultimate motorhome experience for a family of up to" +
-      " 6 people. Large and spacious inside, two separate sleeping/living areas provide real flexibility. On a lazy day " +
-      "you can leave the bed made up, passenger seating directly behind the driver means you can keep an eye on the kids" +
-      " with belted seating for 4! All extras are taken care of with a generous kitchen, spacious bathroom, extra-large beds," +
-      " open-plan living, and many more features to make your holiday a pleasure. Your very own home away from home!" +
-      "Equipped with Smart Key Entry and Push Button Start. A reversing camera with dynamic guide lines add to the convenient " +
-      "safety features of the all-new Corolla Wagon. The Wagon features a low roof height making easy work of loading anything " +
-      "from sports gear to holiday luggage to a surfboard on the roof."
+      " 6 people.<br> Large and spacious inside, two separate sleeping/living areas provide real flexibility. All extras " +
+      "are taken care of with a generous kitchen, spacious bathroom, extra-large beds, open-plan living, and many more " +
+      "features to make your holiday a pleasure.<br>"
 
 
 
@@ -191,10 +182,10 @@ var carsAvailable = [
     price: 200,
     manufacturedDate: "2016",
     engine: "198hp",
-    carDescription: "The Explorer 4 Berth campervan is perfect for a spacious trip away and ideal for a family of four or group of friends." +
-      "The Britz Explorer 4 Berth Motorhome includes many of our own innovative features. All 4 passengers sit up front together while travelling" +
-      " New Zealand, with two purpose built seats behind the driver. At day’s end just swivel the front seats around to create a lounge area for " +
-      "enjoying a drink, playing games or viewing your favourite DVD. Internal access between the driver’s cab and the rear living area," +
+    carDescription: "The Explorer 4 Berth campervan is perfect for a spacious trip away and ideal for a family of four or group of friends.<br>" +
+      " All 4 passengers sit up front together while travelling New Zealand, with two purpose built seats behind the driver. " +
+      "At day’s end just swivel the front seats around to create a lounge area for enjoying a drink, playing games or viewing your favourite DVD." +
+      "<br> Internal access between the driver’s cab and the rear living area," +
       " swivelling front seats, shower and toilet, refrigerator with freezer" +
       ", microwave, excellent kitchen facilities , LCD screen & DVD player and a filtered water system are just some of the features. Everything " +
       "you need for your New Zealand campervan holiday experience."
@@ -351,10 +342,6 @@ $(document).ready(function () {
 
 
   });
-  var script = document.createElement('script');
-  // script.src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc&callback=initMap';
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc';
-  document.getElementsByTagName('body')[0].appendChild(script);
 
   // Step 4
 
@@ -471,26 +458,39 @@ $(document).ready(function () {
 
         '    </div>' +
         '    <div class="modal-footer">' +
-        '      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
-        '      <button type="button" class="btn btn-primary">Save changes</button>' +
+        '      <button type="button" class="btn btn-primary">Select this car</button>' +
         '    </div>')
     });
   }
 });
 
+var script = document.createElement('script');
+script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDbpUzFX_ey574BjAKWiBA7VHN11-27IHc'
+document.getElementsByTagName('body')[0].appendChild(script);
+
 function initMap(origin, destination) {
   console.log(origin, destination);
-  if (origin === "Wellington") {
-    origin = "Wellington, New Zealand";
-  }
-  if (destination === "Auckland") {
-    origin = "Auckland, New Zealand";
-  }
+//   if (origin === "Auckland") {
+//     origin = "Auckland, New Zealand";
+//   }
+// //  } else if (origin === "Wellington") {
+// //     origin = "Wellington, New Zealand";
+// //   } else if (origin === "Dunedin") {
+// //     origin = "Christchurch, New Zealand";
+// //   } else if (origin === "Dunedin") {
+// //     origin = "Dunedin, New Zealand";
+// //   } 
 
-  var auckland = { lat: -36.8485, lng: 174.9120 };
-  var wellington = { lat: -41.2865, lng: 174.7762 };
-  var christchurch = { lat: -43.5321, lng: 172.6362 };
-  var dunedin = { lat: -45.9258577, lng: 170.1999741 };
+
+
+//   if (destination === "Auckland") {
+//     destination = "Auckland, New Zealand";
+//   }
+
+//   var auckland = { lat: -36.8485, lng: 174.9120 };
+//   var wellington = { lat: -41.2865, lng: 174.7762 };
+//   var christchurch = { lat: -43.5321, lng: 172.6362 };
+//   var dunedin = { lat: -45.9258577, lng: 170.1999741 };
 
   var directionsService = new google.maps.DirectionsService;
   var directionsRenderer = new google.maps.DirectionsRenderer;
@@ -500,14 +500,10 @@ function initMap(origin, destination) {
     zoom: 5
   });
 
-  var marker1 = new google.maps.Marker({ position: auckland, map: map });
-  var marker2 = new google.maps.Marker({ position: wellington, map: map });
-  var marker3 = new google.maps.Marker({ position: christchurch, map: map });
-  var marker4 = new google.maps.Marker({ position: dunedin, map: map });
-
-
-
-
+//   var marker1 = new google.maps.Marker({ position: auckland, map: map });
+//   var marker2 = new google.maps.Marker({ position: wellington, map: map });
+//   var marker3 = new google.maps.Marker({ position: christchurch, map: map });
+//   var marker4 = new google.maps.Marker({ position: dunedin, map: map });
 
 
 
@@ -516,23 +512,25 @@ function initMap(origin, destination) {
 
   directionsRenderer.setMap(map);
 
-  document.getElementById('toButtonConfirm').addEventListener('click', function () {
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
-  });
+//   document.getElementById('test').addEventListener('click', function () {
+//     console.log("button");
+//     console.log(origin, destination);
+    // calculateAndDisplayRoute(directionsService, directionsRenderer);
+//   });
 
 
-  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    var waypts = [];
-    var checkboxArray = document.getElementById('waypoints');
-    for (var i = 0; i < checkboxArray.length; i++) {
-      if (checkboxArray.options[i].selected) {
-        waypts.push({
-          location: checkboxArray[i].value,
-          stopover: true
-        });
-      }
-    }
-
+//   function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+//     var waypts = [];
+    // var checkboxArray = document.getElementById('waypoints');
+    // for (var i = 0; i < checkboxArray.length; i++) {
+    //   if (checkboxArray.options[i].selected) {
+    //     waypts.push({
+    //       location: checkboxArray[i].value,
+    //       stopover: true
+    //     });
+    //   }
+    // } 
+console.log(origin, destination);
     directionsService.route({
       origin: origin,
       destination: destination,
@@ -546,6 +544,9 @@ function initMap(origin, destination) {
 
         directionsRenderer.setDirections(response);
         var route = response.routes[0];
+        var firstRouteLeg = route.legs[0];
+
+        console.log("Driving distance is " + firstRouteLeg.distance.text + " (" + firstRouteLeg.duration.text + ").");
         //    var summaryPanel = document.getElementById('directions-panel');
         //    summaryPanel.innerHTML = '';
         //    // For each route, display summary information.
@@ -557,23 +558,16 @@ function initMap(origin, destination) {
         //      summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
         //      summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
         //      summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-        //      var distance = route.legs[i].distance.text;
-<<<<<<< HEAD
-             
-    }
-} else {
-  window.alert('Directions request failed due to ' + status);
-}
-});
-=======
+        //    var distance = route.legs[i].distance.text;
+        //    console.log(distance);
 
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     })
   }
->>>>>>> 1a57341a4ed300eaba0b1e3621d6ea411b361be4
-}
+
+
 
 
 
