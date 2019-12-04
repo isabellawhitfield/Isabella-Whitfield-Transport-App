@@ -41,10 +41,6 @@ var carsAvailable = [
       " of an iconic motorcycle that embodies the sporty personality that only a lively, mid-sized V-twin roadster can deliver. Its polished powerplant " +
       "provides increased performance with low emissions and outstanding fuel economy, mated to refined trim and lightweight chassis that delivers a" +
       "sporty, exciting ride."
-
-
-
-
   },
   {
     name: "Corolla Hatch GX",
@@ -66,10 +62,6 @@ var carsAvailable = [
       "efforts to mitigate unwanted road noise, provide for a very comfortable driving experience. You will also note just how peaceful it is inside the " +
       "Corolla hatch’s cabin; Toyota has worked hard to improve on silencing material used in the model’s interior panels to ensure the quietest possible " +
       "ride, regardless of the road surface you are travelling on."
-
-
-
-
   },
   {
     name: "Yaris GX",
@@ -91,9 +83,6 @@ var carsAvailable = [
       " The 5-star ANCAP rated Yaris range gives you peace of mind while you’re out and about." +
       " Look around the cabin and not only will you be impressed with " +
       "the quality materials on offer, you’ll also note that this is one compact car with comfortable dimensions."
-
-
-
   },
   {
     name: "Toyota Rav4",
@@ -114,9 +103,6 @@ var carsAvailable = [
     carDescription: "Next-Gen RAV4 is a No Compromise SUV designed to meet the needs of active, adventurous and sustainably-conscious New Zealand " +
       "vistors who are both young and young at heart. The Next-Gen RAV4 SUV provides high levels of safety, fuel-efficiency, occupant comfort, " +
       "luggage capacity, towing capability, and user-friendly design and technology."
-
-
-
   },
   {
     name: "Corolla Wagon GX",
@@ -138,9 +124,6 @@ var carsAvailable = [
       "Equipped with Smart Key Entry and Push Button Start. A reversing camera with dynamic guide lines add to the convenient " +
       "safety features of the all-new Corolla Wagon. The Wagon features a low roof height making easy work of loading anything " +
       "from sports gear to holiday luggage to a surfboard on the roof."
-
-
-
   },
   {
     name: "Ford Coachmen Freelancer",
@@ -162,9 +145,6 @@ var carsAvailable = [
       " 6 people.<br> Large and spacious inside, two separate sleeping/living areas provide real flexibility. All extras " +
       "are taken care of with a generous kitchen, spacious bathroom, extra-large beds, open-plan living, and many more " +
       "features to make your holiday a pleasure.<br>"
-
-
-
   },
   {
     name: "Britz Explorer 4 Berth Campervan",
@@ -189,9 +169,6 @@ var carsAvailable = [
       " swivelling front seats, shower and toilet, refrigerator with freezer" +
       ", microwave, excellent kitchen facilities , LCD screen & DVD player and a filtered water system are just some of the features. Everything " +
       "you need for your New Zealand campervan holiday experience."
-
-
-
   },
 
 ]
