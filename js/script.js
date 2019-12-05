@@ -17,9 +17,11 @@ var carsAvailable = [
     price: 109,
     manufacturedDate: "2016",
     engine: "798cc",
-    carDescription: "The ride with BMW F 700 GS is not just safer but also offers especially high comfort – low weight, reduced seat height and a " +
-      "lowering option. Due to its low weight and many different seat variants from high to low-slung," +
-      "  it is also particularly suited to female riders and beginners as an ideal all-round endro machine."
+    carDescription: "The ride with BMW F 700 GS is not just safer but also " +
+      "offers especially high comfort – low weight, reduced seat height and " +
+      "a lowering option. Due to its low weight and many different seat " +
+      "variants from high to low-slung, it is also particularly suited to " +
+      "female riders and beginners as an ideal all-round endro machine."
   },
   {
     name: "Suzuki SV650",
@@ -37,10 +39,13 @@ var carsAvailable = [
     price: 109,
     manufacturedDate: "2017",
     engine: "645cc",
-    carDescription: "The Suzuki SV 650 is available as a full power or LAMS (learner approved) bike.The 2017 Suzuki SV 650 introduces a new version" +
-      " of an iconic motorcycle that embodies the sporty personality that only a lively, mid-sized V-twin roadster can deliver. Its polished powerplant " +
-      "provides increased performance with low emissions and outstanding fuel economy, mated to refined trim and lightweight chassis that delivers a" +
-      "sporty, exciting ride."
+    carDescription: "The Suzuki SV 650 is available as a full power or LAMS " +
+      "(learner approved) bike.The 2017 Suzuki SV 650 introduces a new " +
+      "version of an iconic motorcycle that embodies the sporty personality " +
+      "that only a lively, mid-sized V-twin roadster can deliver. " +
+      "Its polished powerplant provides increased performance with low " +
+      "emissions and outstanding fuel economy, mated to refined trim and " +
+      "lightweight chassis that delivers a sporty, exciting ride."
   },
   {
     name: "Corolla Hatch GX",
@@ -58,10 +63,14 @@ var carsAvailable = [
     price: 129,
     manufacturedDate: "2018",
     engine: "2000cc",
-    carDescription: "The Corolla GX hatch rides on stylish 16” alloy wheels which, combined with Toyota’s strenuous " +
-      "efforts to mitigate unwanted road noise, provide for a very comfortable driving experience. You will also note just how peaceful it is inside the " +
-      "Corolla hatch’s cabin; Toyota has worked hard to improve on silencing material used in the model’s interior panels to ensure the quietest possible " +
-      "ride, regardless of the road surface you are travelling on."
+    carDescription: "The Corolla GX hatch rides on stylish 16” alloy wheels " +
+      "which, combined with Toyota’s strenuous efforts to mitigate unwanted " +
+      "road noise, provide for a very comfortable driving experience. " +
+      "You will also note just how peaceful it is inside the " +
+      "Corolla hatch’s cabin; Toyota has worked hard to improve on " +
+      "silencing material used in the model’s interior panels to ensure " +
+      "the quietest possible ride, regardless of the road surface you are " +
+      "travelling on."
   },
   {
     name: "Yaris GX",
@@ -79,10 +88,13 @@ var carsAvailable = [
     price: 129,
     manufacturedDate: "2017",
     engine: "1300cc",
-    carDescription: "Yaris Hatch is bursting with funky features and cool technologies. It’s not only a fun way to get around, but safe and stylish too." +
-      " The 5-star ANCAP rated Yaris range gives you peace of mind while you’re out and about." +
-      " Look around the cabin and not only will you be impressed with " +
-      "the quality materials on offer, you’ll also note that this is one compact car with comfortable dimensions."
+    carDescription: "Yaris Hatch is bursting with funky features and cool " +
+      "technologies. It’s not only a fun way to get around, but safe and " +
+      "stylish too. The 5-star ANCAP rated Yaris range gives you peace " +
+      "of mind while you’re out and about. Look around the cabin and not " +
+      "only will you be impressed with the quality materials on offer, " +
+      "you’ll also note that this is one compact car with comfortable " +
+      "dimensions."
   },
   {
     name: "Toyota Rav4",
@@ -100,9 +112,12 @@ var carsAvailable = [
     price: 144,
     manufacturedDate: "2018",
     engine: "2500cc",
-    carDescription: "Next-Gen RAV4 is a No Compromise SUV designed to meet the needs of active, adventurous and sustainably-conscious New Zealand " +
-      "vistors who are both young and young at heart. The Next-Gen RAV4 SUV provides high levels of safety, fuel-efficiency, occupant comfort, " +
-      "luggage capacity, towing capability, and user-friendly design and technology."
+    carDescription: "Next-Gen RAV4 is a No Compromise SUV designed to " +
+      "meet the needs of active, adventurous and sustainably-conscious " +
+      "New Zealand vistors who are both young and young at heart. The " +
+      "Next-Gen RAV4 SUV provides high levels of safety, fuel-efficiency, " +
+      "occupant comfort, luggage capacity, towing capability, and " +
+      "user-friendly design and technology."
   },
   {
     name: "Corolla Wagon GX",
@@ -169,8 +184,7 @@ var carsAvailable = [
       " swivelling front seats, shower and toilet, refrigerator with freezer" +
       ", microwave, excellent kitchen facilities , LCD screen & DVD player and a filtered water system are just some of the features. Everything " +
       "you need for your New Zealand campervan holiday experience."
-  },
-
+  }
 ]
 
 var locations = [
@@ -193,8 +207,7 @@ var locations = [
     name: "Dunedin",
     lat: -45.9258615,
     lng: 170.1999794
-  },
-
+  }
 ]
 
 
@@ -395,7 +408,8 @@ $(document).ready(function () {
     // Use moment.js diff to calculate amount of days between dates
     tripLengthDays = end.diff(start, 'days');
 
-    // find valid ranges for chosen dates, to ensure input will result in car options
+    // find valid ranges for chosen dates, to ensure input will
+    // result in car options
     var smallestMinDays = carPeopleRequirements[0].minDays;
     var largestMaxDays = carPeopleRequirements[0].maxDays;
     for (var i = 0; i < carPeopleRequirements.length; i++) {
@@ -415,7 +429,8 @@ $(document).ready(function () {
     if (tripLengthDays < smallestMinDays || tripLengthDays > largestMaxDays) {
       // Show error box and set text
       $('#invalidDateError').removeClass('d-none');
-      $('#invalidDateError').text("Please choose a date range between " + smallestMinDays + " days and " +
+      $('#invalidDateError').text("Please choose a date range between " +
+        smallestMinDays + " days and " +
         largestMaxDays + " days");
     } else {
       // Make sure error is hidden unless activated
@@ -450,74 +465,101 @@ $(document).ready(function () {
 
       if (isElligible) {
 
-        $('#carContent').append('<div class="card card--car" id="' + id + '" data-toggle="modal" data-target="#exampleModalCenter"> ' +
+        $('#carContent').append('<div class="card card--car" id="' + id +
+          '" data-toggle="modal" data-target="#exampleModalCenter"> ' +
           '<img src="' + carObject.photo1 + '" class="card-img-top">' +
           '<div class="card-body ">' +
-          '<h5 class="card-title font-weight-bold">' + carObject.name + '</h5>' +
-          '<div class="row">' +
+          '<h5 class="card-title font-weight-bold">' + carObject.name +
+          '</h5>' + '<div class="row">' +
           '<p class="card-text col-6">' + carObject.transmission + '</p>' +
-          '<p class="card-text text-right col-6 font-weight-bold">$' + carObject.price + '/day</p>' +
+          '<p class="card-text text-right col-6 font-weight-bold">$' +
+          carObject.price + '/day</p>' +
           '</div>' +
           '</div>' +
           '</div>');
 
         $('#' + id).click(carObject, function (event) {
           var carObject = event.data;
-          $('#carModalContent').html('<div id="carouselExampleControls" class="carousel slide carousel--car" data-ride="carousel">' +
+          $('#carModalContent').html('<div id="carouselExampleControls" ' +
+            'class="carousel slide carousel--car" data-ride="carousel">' +
             '      <div class="carousel-inner">' +
             '        <div class="carousel-item active">' +
-            '          <img class="d-block w-100" src="' + carObject.photo1 + '">' +
+            '          <img class="d-block w-100" src="' +
+            carObject.photo1 + '">' +
             '        </div>' +
             '        <div class="carousel-item">' +
-            '          <img class="d-block w-100" src="' + carObject.photo2 + '">' +
+            '          <img class="d-block w-100" src="' +
+            carObject.photo2 + '">' +
             '        </div>' +
             '        <div class="carousel-item">' +
-            '          <img class="d-block w-100" src="' + carObject.photo3 + '">' +
+            '          <img class="d-block w-100" src="' +
+            carObject.photo3 + '">' +
             '        </div>' +
             '      </div>' +
-            '      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">' +
-            '        <span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+            '      <a class="carousel-control-prev" ' +
+            'href="#carouselExampleControls" role="button" ' +
+            'data-slide="prev">' +
+            '        <span class="carousel-control-prev-icon" ' +
+            'aria-hidden="true"></span>' +
             '        <span class="sr-only">Previous</span>' +
             '      </a>' +
-            '      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">' +
-            '        <span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+            '      <a class="carousel-control-next" ' +
+            'href="#carouselExampleControls" role="button" ' +
+            'data-slide="next">' +
+            '        <span class="carousel-control-next-icon" ' +
+            'aria-hidden="true"></span>' +
             '        <span class="sr-only">Next</span>' +
             '      </a>' +
             '    </div>' +
 
             '    <div class="modal-header">' +
-            '      <h5 class="modal-title font-weight-bold" id="modalCarName">' + carObject.name + '</h5>' +
+            '      <h5 class="modal-title font-weight-bold" ' +
+            'id="modalCarName">' + carObject.name + '</h5>' +
 
-            '      <button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
+            '      <button type="button" class="close" data-dismiss="modal" ' +
+            'aria-label="Close">' +
             '        <span aria-hidden="true">&times;</span>' +
             '      </button>' +
             '    </div>' +
 
             '    <div class="modal-body">' +
 
-            '     <div class="container">' + '<div class="row" id="modalCarFacts"</div>' +
+            '     <div class="container">' + '<div class="row" ' +
+            'id="modalCarFacts"</div>' +
 
-            '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' + carObject.transmission + '</p>' +
-            '       <p class="card-text col-6 font-weight-bold"><i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day</p>' +
-            '     </div>' +
-
-            '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-car"></i> ' + carObject.manufacturedDate +
-            '       </p>' + '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' + carObject.fuelType + '</p>' + '</div>' +
-
-            '     <div class="row" id="modalCarFacts"</div>' + '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' + carObject.engine +
-            '       </p>' + '<p class="card-text col-6"><i class="fas fa-tachometer-alt"></i> ' + carObject.fuelEfficiency + '</p>' + '</div>' +
+            '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' +
+            carObject.transmission + '</p>' +
+            '       <p class="card-text col-6 font-weight-bold">' +
+            '<i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day' +
+            '</p>' + '</div>' +
 
             '     <div class="row" id="modalCarFacts"</div>' +
-            '       <p class="card-text col-6"><i class="far fa-calendar-alt"></i> ' + carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
-            '       <p class="card-text col-6"><i class="fas fa-user-friends"></i> ' + carObject.minPeople + ' -' + carObject.maxPeople + ' people</p>' +
+            '<p class="card-text col-6"><i class="fas fa-car"></i> ' +
+            carObject.manufacturedDate + '       </p>' +
+            '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' +
+            carObject.fuelType + '</p>' + '</div>' +
+
+            '     <div class="row" id="modalCarFacts"</div>' +
+            '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' +
+            carObject.engine + '</p><p class="card-text col-6">' +
+            '<i class="fas fa-tachometer-alt"></i> ' +
+            carObject.fuelEfficiency + '</p>' + '</div>' +
+
+            '     <div class="row" id="modalCarFacts"</div>' +
+            '       <p class="card-text col-6">' +
+            '<i class="far fa-calendar-alt"></i> ' +
+            carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
+            '       <p class="card-text col-6">' +
+            '<i class="fas fa-user-friends"></i> ' + carObject.minPeople +
+            ' -' + carObject.maxPeople + ' people</p>' +
             '     </div></div>' +
 
             '       <p>' + carObject.carDescription + '</p>' +
 
             '    </div>' +
             '    <div class="modal-footer">' +
-            '      <button id="selectCarButton" type="button" data-dismiss="modal" class="btn btn-primary">Select this car</button>' +
-            '    </div>')
+            '<button id="selectCarButton" type="button" data-dismiss="modal"' +
+            'class="btn btn-primary">Select this car</button>' + '    </div>')
           $('#selectCarButton').click(function () {
             // Store selected car
             selectedCar = carObject;
@@ -575,10 +617,12 @@ $(document).ready(function () {
         // Calculations about the trip
         var distanceTravelled = firstRouteLeg.distance.text;
         var timeTaken = firstRouteLeg.duration.text;
-        var litresUsed = selectedCar.fuelEfficiency * (firstRouteLeg.distance.value / 100000);
+        var litresUsed = selectedCar.fuelEfficiency * (
+          firstRouteLeg.distance.value / 100000
+        );
         // Made-up constant for the price of fuel
         var fuelCostPerLitre = 2.35;
-        var fuelCostTotal = litresUsed * fuelCostPerLitre;
+        var fuelCostTotal = Math.round(litresUsed * fuelCostPerLitre);
         var carHireCostTotal = selectedCar.price * tripLengthDays;
 
         // Insert summaries into the page
@@ -593,15 +637,16 @@ $(document).ready(function () {
           '</div>' +
           '<div class="row">' +
           '<div class="col-6">Total fuel (estimate)</div>' +
-          '<div class="col-6 text-right">' + Math.round(litresUsed) + 'L</div>' +
-          '</div>' +
+          '<div class="col-6 text-right">' + Math.round(litresUsed) + 'L' +
+          '</div></div>' +
           '<div class="row">' +
           '<div class="col-6">Fuel cost</div>' +
-          '<div class="col-6 text-right">$' + Math.round(fuelCostTotal) + '</div>' +
-          '</div>' +
+          '<div class="col-6 text-right">$' + Math.round(fuelCostTotal) +
+          '</div></div>' +
           '<div class="row">' +
           '<div class="col-6">Car hire cost</div>' +
-          '<div class="col-6 text-right">$' + Math.round(carHireCostTotal) + ' (total)</div>' +
+          '<div class="col-6 text-right">$' + Math.round(carHireCostTotal) +
+          ' (total)</div>' +
           '</div>'
         );
       } else {
