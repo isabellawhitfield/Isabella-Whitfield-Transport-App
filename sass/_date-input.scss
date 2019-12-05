@@ -4,3 +4,9 @@
   height: 60px;
   font-size: 1.5rem;
 }
+
+.invalidDateError {
+  padding: $margin;
+  background-color: rgba(0,0,0,0.2);
+  color: white;
+}

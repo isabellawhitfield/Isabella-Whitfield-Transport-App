@@ -1,12 +1,17 @@
 body {
   background-image: url("../images/background-image.jpeg");
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   min-height: 100vh;
 }
 
 img {
   display: block;
+}
+
+.brandImage {
+  display: inline-block;
 }
 
 .centeredImage {
