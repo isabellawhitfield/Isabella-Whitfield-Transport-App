@@ -228,7 +228,7 @@ $(document).ready(function () {
     // Hide the heading and show the button
     $('#journeyStartHeading').addClass('d-none');
     $('#fromButtonConfirm').removeClass('d-none');
-    $('#fromButtonConfirm').text('Select ' + cityName);
+    $('#fromButtonConfirm').text('Confirm ' + cityName);
 
     // Hide the 'from' kiwi and show the 'okay' kiwi
     $('#kiwiFrom').addClass('d-none');
@@ -281,7 +281,7 @@ $(document).ready(function () {
     // Hide the heading and show the button
     $('#journeyEndHeading').addClass('d-none');
     $('#toButtonConfirm').removeClass('d-none');
-    $('#toButtonConfirm').text('Select ' + cityName);
+    $('#toButtonConfirm').text('Confirm ' + cityName);
 
     // Hide the 'to' kiwi and show the 'okay' kiwi
     $('#kiwiTo').addClass('d-none');
@@ -534,8 +534,12 @@ $(document).ready(function () {
   }
 
   // Step 7 View map
-  $('#confirmBookingButton').click(function() {
-    alert("You're all booked! Have a great trip!");
+  $('#confirmBookingButton').click(function () {
+    // Hide step 7 to create loop back to start
+    $('#confirmScreen').addClass('d-none');
+
+    // Show step 1
+    $('#startScreen').removeClass('d-none');
   });
 
   function initMap(origin, destination) {
@@ -578,7 +582,7 @@ $(document).ready(function () {
         var carHireCostTotal = selectedCar.price * tripLengthDays;
 
         // Insert summaries into the page
-        $('#directionsPanel').html(
+        $('#directionsPanel').html('<h3>Details of your trip:</h3>' +
           '<div class="row">' +
           '<div class="col-6">Distance</div>' +
           '<div class="col-6 text-right">' + distanceTravelled + '</div>' +
