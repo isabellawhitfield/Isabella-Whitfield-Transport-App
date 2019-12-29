@@ -1,0 +1,2 @@
+// Copy or rename this file to 'config.json'
+apiKey = '[{"key" : "YOUR-API-KEY-HERE"}]';

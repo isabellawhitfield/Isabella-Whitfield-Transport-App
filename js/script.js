@@ -185,7 +185,7 @@ var carsAvailable = [
       ", microwave, excellent kitchen facilities , LCD screen & DVD player and a filtered water system are just some of the features. Everything " +
       "you need for your New Zealand campervan holiday experience."
   }
-]
+];
 
 var locations = [
   {
@@ -208,7 +208,7 @@ var locations = [
     lat: -45.9258615,
     lng: 170.1999794
   }
-]
+];
 
 
 
@@ -478,99 +478,7 @@ $(document).ready(function () {
           '</div>' +
           '</div>');
 
-        $('#' + id).click(carObject, function (event) {
-          var carObject = event.data;
-          $('#carModalContent').html('<div id="carouselExampleControls" ' +
-            'class="carousel slide carousel--car" data-ride="carousel">' +
-            '      <div class="carousel-inner">' +
-            '        <div class="carousel-item active">' +
-            '          <img class="d-block w-100" src="' +
-            carObject.photo1 + '">' +
-            '        </div>' +
-            '        <div class="carousel-item">' +
-            '          <img class="d-block w-100" src="' +
-            carObject.photo2 + '">' +
-            '        </div>' +
-            '        <div class="carousel-item">' +
-            '          <img class="d-block w-100" src="' +
-            carObject.photo3 + '">' +
-            '        </div>' +
-            '      </div>' +
-            '      <a class="carousel-control-prev" ' +
-            'href="#carouselExampleControls" role="button" ' +
-            'data-slide="prev">' +
-            '        <span class="carousel-control-prev-icon" ' +
-            'aria-hidden="true"></span>' +
-            '        <span class="sr-only">Previous</span>' +
-            '      </a>' +
-            '      <a class="carousel-control-next" ' +
-            'href="#carouselExampleControls" role="button" ' +
-            'data-slide="next">' +
-            '        <span class="carousel-control-next-icon" ' +
-            'aria-hidden="true"></span>' +
-            '        <span class="sr-only">Next</span>' +
-            '      </a>' +
-            '    </div>' +
-
-            '    <div class="modal-header">' +
-            '      <h5 class="modal-title font-weight-bold" ' +
-            'id="modalCarName">' + carObject.name + '</h5>' +
-
-            '      <button type="button" class="close" data-dismiss="modal" ' +
-            'aria-label="Close">' +
-            '        <span aria-hidden="true">&times;</span>' +
-            '      </button>' +
-            '    </div>' +
-
-            '    <div class="modal-body">' +
-
-            '     <div class="container">' + '<div class="row" ' +
-            'id="modalCarFacts"</div>' +
-
-            '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' +
-            carObject.transmission + '</p>' +
-            '       <p class="card-text col-6 font-weight-bold">' +
-            '<i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day' +
-            '</p>' + '</div>' +
-
-            '     <div class="row" id="modalCarFacts"</div>' +
-            '<p class="card-text col-6"><i class="fas fa-car"></i> ' +
-            carObject.manufacturedDate + '       </p>' +
-            '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' +
-            carObject.fuelType + '</p>' + '</div>' +
-
-            '     <div class="row" id="modalCarFacts"</div>' +
-            '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' +
-            carObject.engine + '</p><p class="card-text col-6">' +
-            '<i class="fas fa-tachometer-alt"></i> ' +
-            carObject.fuelEfficiency + '</p>' + '</div>' +
-
-            '     <div class="row" id="modalCarFacts"</div>' +
-            '       <p class="card-text col-6">' +
-            '<i class="far fa-calendar-alt"></i> ' +
-            carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
-            '       <p class="card-text col-6">' +
-            '<i class="fas fa-user-friends"></i> ' + carObject.minPeople +
-            ' -' + carObject.maxPeople + ' people</p>' +
-            '     </div></div>' +
-
-            '       <p>' + carObject.carDescription + '</p>' +
-
-            '    </div>' +
-            '    <div class="modal-footer">' +
-            '<button id="selectCarButton" type="button" data-dismiss="modal"' +
-            'class="btn btn-primary">Select this car</button>' + '    </div>')
-          $('#selectCarButton').click(function () {
-            // Store selected car
-            selectedCar = carObject;
-            // Hide step 6
-            $('#carScreen').addClass('d-none');
-
-            // Show step 7
-            $('#confirmScreen').removeClass('d-none');
-            initMap(cityFrom, cityTo);
-          });
-        });
+        $('#' + id).click(carObject, onClickCarCard);
       }
     }
   }
@@ -652,11 +560,108 @@ $(document).ready(function () {
       } else {
         window.alert('Directions request failed due to ' + status);
       }
-    })
+    });
+  }
+
+  function onClickCarCard(event) {
+    var carObject = event.data;
+    $('#carModalContent').html('<div id="carouselExampleControls" ' +
+      'class="carousel slide carousel--car" data-ride="carousel">' +
+      '      <div class="carousel-inner">' +
+      '        <div class="carousel-item active">' +
+      '          <img class="d-block w-100" src="' +
+      carObject.photo1 + '">' +
+      '        </div>' +
+      '        <div class="carousel-item">' +
+      '          <img class="d-block w-100" src="' +
+      carObject.photo2 + '">' +
+      '        </div>' +
+      '        <div class="carousel-item">' +
+      '          <img class="d-block w-100" src="' +
+      carObject.photo3 + '">' +
+      '        </div>' +
+      '      </div>' +
+      '      <a class="carousel-control-prev" ' +
+      'href="#carouselExampleControls" role="button" ' +
+      'data-slide="prev">' +
+      '        <span class="carousel-control-prev-icon" ' +
+      'aria-hidden="true"></span>' +
+      '        <span class="sr-only">Previous</span>' +
+      '      </a>' +
+      '      <a class="carousel-control-next" ' +
+      'href="#carouselExampleControls" role="button" ' +
+      'data-slide="next">' +
+      '        <span class="carousel-control-next-icon" ' +
+      'aria-hidden="true"></span>' +
+      '        <span class="sr-only">Next</span>' +
+      '      </a>' +
+      '    </div>' +
+
+      '    <div class="modal-header">' +
+      '      <h5 class="modal-title font-weight-bold" ' +
+      'id="modalCarName">' + carObject.name + '</h5>' +
+
+      '      <button type="button" class="close" data-dismiss="modal" ' +
+      'aria-label="Close">' +
+      '        <span aria-hidden="true">&times;</span>' +
+      '      </button>' +
+      '    </div>' +
+
+      '    <div class="modal-body">' +
+
+      '     <div class="container">' + '<div class="row" ' +
+      'id="modalCarFacts"</div>' +
+
+      '       <p class="card-text col-6"><i class="fas fa-cog"></i> ' +
+      carObject.transmission + '</p>' +
+      '       <p class="card-text col-6 font-weight-bold">' +
+      '<i class="fas fa-dollar-sign"></i> ' + carObject.price + '/day' +
+      '</p>' + '</div>' +
+
+      '     <div class="row" id="modalCarFacts"</div>' +
+      '<p class="card-text col-6"><i class="fas fa-car"></i> ' +
+      carObject.manufacturedDate + '       </p>' +
+      '<p class="card-text col-6"><i class="fas fa-gas-pump"></i> ' +
+      carObject.fuelType + '</p>' + '</div>' +
+
+      '     <div class="row" id="modalCarFacts"</div>' +
+      '<p class="card-text col-6"><i class="fas fa-bolt"></i> ' +
+      carObject.engine + '</p><p class="card-text col-6">' +
+      '<i class="fas fa-tachometer-alt"></i> ' +
+      carObject.fuelEfficiency + '</p>' + '</div>' +
+
+      '     <div class="row" id="modalCarFacts"</div>' +
+      '       <p class="card-text col-6">' +
+      '<i class="far fa-calendar-alt"></i> ' +
+      carObject.minDays + '-' + carObject.maxDays + ' days</p>' +
+      '       <p class="card-text col-6">' +
+      '<i class="fas fa-user-friends"></i> ' + carObject.minPeople +
+      ' -' + carObject.maxPeople + ' people</p>' +
+      '     </div></div>' +
+
+      '       <p>' + carObject.carDescription + '</p>' +
+
+      '    </div>' +
+      '    <div class="modal-footer">' +
+      '<button id="selectCarButton" type="button" data-dismiss="modal"' +
+      'class="btn btn-primary">Select this car</button>' + '    </div>');
+    $('#selectCarButton').click(function () {
+      // Store selected car
+      selectedCar = carObject;
+      // Hide step 6
+      $('#carScreen').addClass('d-none');
+
+      // Show step 7
+      $('#confirmScreen').removeClass('d-none');
+      initMap(cityFrom, cityTo);
+    });
   }
 });
 
+
+
 // Load google maps script
 var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=' + API_KEY;
+var myKey = JSON.parse(apiKey); //convert JSON data into js object
+script.src = 'https://maps.googleapis.com/maps/api/js?key=' + myKey[0].key;
 document.getElementsByTagName('body')[0].appendChild(script);
